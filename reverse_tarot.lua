@@ -878,7 +878,6 @@ SMODS.Consumable{
     end
 }
 
---Reverse Lovers is Fucked
 SMODS.Consumable{
     key = "c_reverse_lovers",
     set = "Tarot",
