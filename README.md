@@ -2,7 +2,7 @@ Documentation of all added cards:<br/>
 #-----------------------------------------------------------------------------------------<br/>
 Tarots<br/>
 Reverse Fool - Creates an inverted version of the last Tarot card used (regular becomes reverse, reverse becomes regular. Planets spawn as per normal Fool)<br/>
-Reverse Magician - Enhances up to 2 selected cards into Loaded cards: 1/5 for $6, 1/15 for +60 Mult<br/>
+Reverse Magician - Enhances up to 2 selected cards into Loaded card (1/5 for $6, 1/15 for +60 Mult)<br/>
 Reverse High Priestess - Creates a Planet card from your highest levelled hand(s)<br/>
 Reverse Empress - Create up to two Held Mult cards (+6 Mult when held in hand)<br/>
 Reverse Emperor - Create two random Reverse Tarot cards<br/>
