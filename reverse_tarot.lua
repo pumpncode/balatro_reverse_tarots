@@ -26,6 +26,15 @@ SMODS.Atlas{
     py = 95
 }
 
+SMODS.Atlas{
+    key = "Reverse_Bosses",
+    path = "reverse_bosses.png",
+    atlas_table = 'ANIMATION_ATLAS',
+    frames = 21,
+    px = 34,
+    py = 34
+}
+
 SMODS.Sticker{
     key = "ephemeral",
     atlas = "New_Sticker",
@@ -2730,6 +2739,98 @@ SMODS.Joker{
                 colour = G.C.RED
             }
         end
+    end
+}
+
+SMODS.Blind{
+    key = "left_hand",
+    atlas = "Reverse_Bosses",
+    pos = {x = 0, y = 0},
+    loc_txt = {
+        name = "The Left Hand",
+        text = {
+            "Debuffs the effects",
+            "of all cards",
+            "{C:attention}held in hand"
+        }
+    },
+    dollars = 5,
+    mult = 2,
+    discovered = false,
+    boss = {min = 1},
+    boss_colour = HEX('28ADB5'),
+    loc_vars = function(self, info_queue, center)
+        return
+    end,
+    set_blind = function(self)
+        for _, v in ipairs(G.playing_cards) do
+            v:set_debuff(true)
+        end
+        return
+    end,
+    press_play = function(self)
+        for _, v in ipairs(G.hand.highlighted) do
+            v:set_debuff(false)
+        end
+        return
+    end,
+    disable_self = function(self)
+        for _, v in ipairs(G.playing_cards) do
+            v:set_debuff(false)
+        end
+        return
+    end,
+    defeat_self = function(self)
+        for _, v in ipairs(G.playing_cards) do
+            v:set_debuff(false)
+        end
+        return
+    end,
+    recalc_debuff = function(self, card, from_blind)
+        return card.debuff
+    end
+}
+
+SMODS.Blind{
+    key = "right_hand",
+    atlas = "Reverse_Bosses",
+    pos = {x = 0, y = 1},
+    loc_txt = {
+        name = "The Right Hand",
+        text = {
+            "Debuffs the effects",
+            "of all cards",
+            "{C:attention}in scoring hand"
+        }
+    },
+    dollars = 5,
+    mult = 2,
+    discovered = false,
+    boss = {min = 2},
+    boss_colour = HEX('C71FC7'),
+    loc_vars = function(self, info_queue, center)
+        return
+    end,
+    press_play = function(self)
+        if not self.disabled then
+            for _, v in ipairs(G.hand.highlighted) do
+                v:set_debuff(true)
+            end
+        end
+        return
+    end,
+    disable_self = function(self)
+        self.disabled = true
+        return
+    end,
+    defeat_self = function(self)
+        for _, v in ipairs(G.playing_cards) do
+            v:set_debuff(false)
+        end
+        return
+    end,
+    recalc_debuff = function(self, card, from_blind)
+        return card.debuff
     end
 }
 

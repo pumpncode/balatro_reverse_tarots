@@ -26,7 +26,7 @@ Reverse World - Enhances up to 2 cards to Secondary Spades (counts as both base 
 #----------------------------------------------------------------------------------------------<br/>
 Jokers<br/>
 Rekoj - Gives -4 Mult<br/>
-Counterfeit Bill - Gain $5 at the end of round.  Increases by $1 per Loaded card triggered (Enhancement gated)<br/>
+Counterfeit Bill - Gain $5 at the end of round. Increases by $1 per Loaded card triggered (Enhancement gated)<br/>
 Wild Joker - Gains x.1 Mult per card in deck with more than one suit (Enhancement gated)<br/>
 Omni Joker - Scored Omnirank cards give x1.5 Chip when scored (Enhancement gated)<br/>
 Crystal Joker - Gains x.75 Chip per Crystal card broken (Enhancement gated, unlock: have 5 Crystal cards in full deck)<br/>
@@ -37,6 +37,10 @@ Fool’s Gold - Scored Pyrite cards now give the specified money instead of taki
 Rewrite - Gains x.2 Mult every time an already enhanced card is enhanced<br/>
 Cartomancer? - Reverse Tarot version of Cartomancer<br/>
 Card Reading - Creates a Reverse Tarot when hand played with money over interest cap<br/>
-Dead Cat - Sets hands per round to 1, cannot be overwritten.  Prevents death if chips scored are at least 50% of required amount (activates up to 9 times, then destroys itself)<br/>
+Dead Cat - Sets hands per round to 1, cannot be overwritten. Prevents death if chips scored are at least 50% of required amount (activates up to 9 times, then destroys itself)<br/>
 The D6 - Randomly gives between 1 and 6 xMult<br/>
-Double Down - 1 in 2 chance for this card's xMult to be multiplied by 2 when hand played.  Starts at X1, resets at end of round.
+Double Down - 1 in 2 chance for this card's xMult to be multiplied by 2 when hand played. Starts at X1, resets at end of round.
+#----------------------------------------------------------------------------------------------<br/>
+Blinds<br/>
+The Left Hand - All cards debuffed while held in hand<br/>
+The Right Hand - All played cards debuffed<br/>
