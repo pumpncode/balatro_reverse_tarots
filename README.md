@@ -21,7 +21,7 @@ Reverse Tower - Enhances selected card into a Granite card (Rankless, Suitless, 
 Reverse Star -Enhances up to 2 cards to Secondary Diamonds (counts as both base suit and Diamonds)<br/>
 Reverse Moon - Enhances up to 2 cards to Secondary Clubs (counts as both base suit and Clubs)<br/>
 Reverse Sun - Enhances up to 2 cards to Secondary Hearts (counts as both base suit and Hearts)<br/>
-Reverse Judgement -Creates a random Negative Joker that perishes in 3 Rounds, has 0 sell value<br/>
+Reverse Judgement -Creates a random Negative Joker with an Ephemeral sticker (perishes in 3 Rounds, has 0 sell value)<br/>
 Reverse World - Enhances up to 2 cards to Secondary Spades (counts as both base suit and Spades)<br/>
 #----------------------------------------------------------------------------------------------<br/>
 Jokers<br/>
