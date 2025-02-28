@@ -439,3 +439,64 @@ end
 '''
 match_indent = true
 times = 1
+
+
+# Blind patches
+# Ehwaz (incomplete)
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "-- TARGET: adding to hand effects"
+position = 'before'
+match_indent = true
+payload = '''
+if G.GAME.blind.name == "bl_reverse_ehwaz" then
+    final_scoring_hand = G.hand.cards
+end
+'''
+
+# Blank for Serpent
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "if G.GAME.blind.name == 'The Serpent' and"
+position = 'at'
+match_indent = true
+payload = '''
+if ((G.GAME.blind.name == 'The Serpent') or (G.GAME.blind.name == 'bl_reverse_blank' and G.GAME.blank_blind == 'bl_serpent')) and
+'''
+
+# Blank on reload mid-boss
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "G.GAME.blind:load(saveTable.BLIND)"
+position = 'after'
+match_indent = true
+payload = '''
+if G.GAME.blind.name == 'bl_reverse_blank' then
+    G.GAME.blank_obj = Blind(G.GAME.blind.T.x, G.GAME.blind.T.y, G.GAME.blind.T.w, G.GAME.blind.T.h)
+    G.GAME.blank_obj:set_blind(G.P_BLINDS[G.GAME.blank_blind])
+end
+'''
+
+# Black
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "-- TARGET: effects after hand evaluation"
+position = 'after'
+match_indent = true
+payload = '''
+if G.GAME.blind.name == 'bl_reverse_black' then
+    for k, v in pairs(G.play.cards) do
+        v:set_ability(G.P_CENTERS.c_base, nil, true)
+                                    G.E_MANAGER:add_event(Event({
+                                        func = function()
+                                            v:juice_up()
+                                            return true
+                                        end
+                                    }))
+    end
+end
+'''

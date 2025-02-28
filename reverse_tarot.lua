@@ -1187,7 +1187,7 @@ SMODS.Consumable{
         return {vars = { G.GAME.probabilities.normal, center.ability.context.edition_odds}}
     end,
     can_use = function(self, card)
-        if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK and #G.hand.cards > 1 then
+        if #G.hand.cards >= 1 then
             return true
         end
     end,
@@ -1330,7 +1330,7 @@ SMODS.Consumable{
         return {vars = {center.ability.context.number_cards}}
     end,
     can_use = function(self, card)
-        if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK and #G.hand.cards > 1 then
+        if #G.hand.cards >= 1 then
             return true
         end
     end,
@@ -1457,14 +1457,14 @@ SMODS.Consumable{
             end
         end
         money = math.min(money, 50)
-        if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK and #G.hand.cards > 1 then
+        if #G.hand.cards >= 1 then
             return {vars = {center.ability.context.max_money, money}}
         else
             return {vars = {center.ability.context.max_money, 0}}
         end
     end,
     can_use = function(self, card)
-        if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK and #G.hand.cards > 1 then
+        if #G.hand.cards >= 1 then
             return true
         end
     end,
@@ -2743,11 +2743,11 @@ SMODS.Joker{
 }
 
 SMODS.Blind{
-    key = "left_hand",
+    key = "dagaz",
     atlas = "Reverse_Bosses",
     pos = {x = 0, y = 0},
     loc_txt = {
-        name = "The Left Hand",
+        name = "The Pure",
         text = {
             "Debuffs the effects",
             "of all cards",
@@ -2763,6 +2763,7 @@ SMODS.Blind{
         return
     end,
     set_blind = function(self)
+        if self.disabled then return end
         for _, v in ipairs(G.playing_cards) do
             v:set_debuff(true)
         end
@@ -2792,15 +2793,15 @@ SMODS.Blind{
 }
 
 SMODS.Blind{
-    key = "right_hand",
+    key = "berkano",
     atlas = "Reverse_Bosses",
     pos = {x = 0, y = 1},
     loc_txt = {
-        name = "The Right Hand",
+        name = "The Companion",
         text = {
             "Debuffs the effects",
-            "of all cards",
-            "{C:attention}in scoring hand"
+            "of every odd card",
+            "{C:attention}in played hand"
         }
     },
     dollars = 5,
@@ -2813,17 +2814,19 @@ SMODS.Blind{
     end,
     press_play = function(self)
         if not self.disabled then
-            for _, v in ipairs(G.hand.highlighted) do
-                v:set_debuff(true)
+            for i=0, #G.hand.highlighted do
+                if i%2 == 1 then
+                    G.hand.highlighted[i]:set_debuff(true)
+                end
             end
         end
         return
     end,
-    disable_self = function(self)
+    disable = function(self)
         self.disabled = true
         return
     end,
-    defeat_self = function(self)
+    defeat = function(self)
         for _, v in ipairs(G.playing_cards) do
             v:set_debuff(false)
         end
@@ -2832,6 +2835,406 @@ SMODS.Blind{
     recalc_debuff = function(self, card, from_blind)
         return card.debuff
     end
+}
+
+SMODS.Blind{
+    key = "perthro",
+    atlas = "Reverse_Bosses",
+    pos = {x = 0, y = 2},
+    loc_txt = {
+        name = "The Change",
+        text = {
+            "Order of scored and held",
+            "cards is randomized"
+        }
+    },
+    dollars = 5,
+    mult = 2,
+    discovered = false,
+    boss = {min = 2},
+    boss_colour = HEX('BD2745'),
+    loc_vars = function(self, info_queue, center)
+        return
+    end,
+    press_play = function(self)
+        if not self.disabled then
+            G.E_MANAGER:add_event(Event({ func = function() G.play:shuffle('aajk'); play_sound('cardSlide1', 0.85);return true end })) 
+            delay(0.15)
+            G.E_MANAGER:add_event(Event({ func = function() G.play:shuffle('aajk'); play_sound('cardSlide1', 1.15);return true end })) 
+            delay(0.15)
+            G.E_MANAGER:add_event(Event({ func = function() G.play:shuffle('aajk'); play_sound('cardSlide1', 1);return true end })) 
+            delay(0.5)
+            G.E_MANAGER:add_event(Event({ func = function() G.hand:shuffle('aajk'); play_sound('cardSlide1', 0.85);return true end })) 
+            delay(0.15)
+            G.E_MANAGER:add_event(Event({ func = function() G.hand:shuffle('aajk'); play_sound('cardSlide1', 1.15);return true end })) 
+            delay(0.15)
+            G.E_MANAGER:add_event(Event({ func = function() G.hand:shuffle('aajk'); play_sound('cardSlide1', 1);return true end })) 
+            delay(0.5)
+        end
+        return
+    end,
+    disable = function(self)
+        self.disabled = true
+        return
+    end
+}
+
+SMODS.Blind{
+    key = "ehwaz",
+    atlas = "Reverse_Bosses",
+    pos = {x = 0, y = 3},
+    loc_txt = {
+        name = "The Passage",
+        text = {
+            "Cards held in hand score",
+            "instead of played cards",
+            "{C:inactive}(scores as played hand)"
+        }
+    },
+    dollars = 5,
+    mult = 2,
+    discovered = false,
+    boss = {min = 3},
+    boss_colour = HEX('BE721E'),
+    loc_vars = function(self, info_queue, center)
+        return
+    end,
+    press_play = function(self)
+        return
+    end,
+    disable = function(self)
+        self.disabled = true
+        return
+    end
+}
+
+SMODS.Blind{
+    key = "jera",
+    atlas = "Reverse_Bosses",
+    pos = {x = 0, y = 4},
+    loc_txt = {
+        name = "The Abundant",
+        text = {
+            "Extra extra large blind",
+            "X2 hands, X2 discards",
+            "+2 hand size"
+        }
+    },
+    dollars = 5,
+    mult = 6,
+    discovered = false,
+    boss = {min = 2},
+    boss_colour = HEX('8900A2'),
+    loc_vars = function(self, info_queue, center)
+        return
+    end,
+    set_blind = function(self)
+        if self.disabled then return end
+        ease_hands_played(G.GAME.current_round.hands_left)
+        ease_discard(G.GAME.current_round.discards_left)
+        G.hand:change_size(2)
+    end,
+    disable = function(self)
+        self.disabled = true
+        ease_hands_played(-G.GAME.current_round.hands_left + G.GAME.current_round.hands_left/2)
+        ease_discard(-G.GAME.current_round.discards_left + G.GAME.current_round.discards_left/2)
+        G.hand:change_size(-2)
+        G.GAME.blind.chips = G.GAME.blind.chips/3
+        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+        return
+    end
+}
+
+SMODS.Blind{
+    key = "algiz",
+    atlas = "Reverse_Bosses",
+    pos = {x = 0, y = 5},
+    loc_txt = {
+        name = "The Resistant",
+        text = {
+            "Base Hands and",
+            "Discards are halved"
+        }
+    },
+    dollars = 5,
+    mult = 2,
+    discovered = false,
+    boss = {min = 2},
+    boss_colour = HEX('969BC3'),
+    loc_vars = function(self, info_queue, center)
+        return
+    end,
+    set_blind = function(self)
+        if self.disabled then return end
+        ease_hands_played(-G.GAME.current_round.hands_left + G.GAME.current_round.hands_left/2)
+        ease_discard(-G.GAME.current_round.discards_left + G.GAME.current_round.discards_left/2)
+    end,
+    disable = function(self)
+        if self.disabled then return end
+        ease_hands_played(G.GAME.current_round.hands_left)
+        ease_discard(G.GAME.current_round.discards_left)
+        self.disabled = true
+        return
+    end
+}
+
+SMODS.Blind{
+    key = "ansuz",
+    atlas = "Reverse_Bosses",
+    pos = {x = 0, y = 6},
+    loc_txt = {
+        name = "The Vision",
+        text = {
+            "Only your most played hand",
+            "{C:attention}#1#{} will score"
+        }
+    },
+    dollars = 5,
+    mult = 2,
+    discovered = false,
+    boss = {min = 2},
+    boss_colour = HEX('B7D130'),
+    loc_vars = function(self, info_queue, center)
+        return {vars = {G.GAME.current_round.most_played_poker_hand}}
+    end,
+    debuff_hand = function(self, cards, hand, handname, check)
+        if not self.disabled then
+            if handname ~= G.GAME.current_round.most_played_poker_hand then
+                return true
+            end
+        end
+        return false
+    end,
+    disable = function(self)
+        self.disabled = true
+        return
+    end,
+    get_loc_debuff_text = function(self)
+        return "Must play a " .. G.GAME.current_round.most_played_poker_hand
+    end
+}
+
+SMODS.Blind{
+    key = "hagalaz",
+    atlas = "Reverse_Bosses",
+    pos = {x = 0, y = 7},
+    loc_txt = {
+        name = "The Destruction",
+        text = {
+            "Debuffs two random",
+            "cards on draw"
+        }
+    },
+    dollars = 5,
+    mult = 2,
+    discovered = false,
+    boss = {min = 4},
+    boss_colour = HEX('1E8267'),
+    loc_vars = function(self, info_queue, center)
+        return
+    end,
+    drawn_to_hand = function(self)
+        if not self.disabled then
+            local debuff_count = 0
+            local indices = {}
+            for i=1, #G.hand.cards, 1 do
+                --print(G.hand.cards[i].debuff)
+                if not G.hand.cards[i].debuff then
+                    table.insert(indices, i)
+                end
+            end
+            --print(indices)
+            if #indices <= 2 then
+                for i=1, #G.hand.cards, 1 do
+                    if not G.hand.cards[i].debuff then
+                        G.hand.cards[i]:set_debuff(true)
+                    end
+                end
+            else
+                local first = math.floor(pseudorandom('debuff')*#indices) + 1
+                G.hand.cards[indices[first]]:set_debuff(true)
+                local second = math.floor(pseudorandom('debuff')*#indices) + 1
+                while second == first do
+                    second = math.floor(pseudorandom('debuff')*#indices) + 1
+                end
+                G.hand.cards[indices[second]]:set_debuff(true)
+            end
+        end
+        return
+    end,
+    disable = function(self)
+        --undebuff all cards in deck
+        self.disabled = true
+        return
+    end,
+}
+
+function SMODS.current_mod.reset_game_globals(run_start)
+    G.GAME.eligible_blinds = {
+        'bl_hook',
+        'bl_ox',
+        'bl_arm',
+        'bl_club',
+        --'bl_wheel',
+        --'bl_fish',
+        'bl_psychic',
+        'bl_goad',
+        'bl_plant',
+        'bl_serpent',
+        'bl_pillar',
+        'bl_head',
+        'bl_tooth',
+        'bl_flint',
+        --'bl_mark',
+        'bl_reverse_berkano',
+        'bl_reverse_dagaz',
+        'bl_reverse_perthro',
+        'bl_reverse_ansuz'
+        --'bl_reverse_void'
+    }
+    G.GAME.blank_blind = G.GAME.blank_blind or G.GAME.eligible_blinds[math.floor(pseudorandom('blinds')*#G.GAME.eligible_blinds) + 1]
+    G.GAME.blank_played = G.GAME.blank_played
+    --G.GAME.blank_obj = Blind(G.GAME.blind.T.x, G.GAME.blind.T.y, G.GAME.blind.T.w, G.GAME.blind.T.h)
+    --G.GAME.blank_obj:set_blind(G.P_BLINDS[G.GAME.blank_blind])
+    return
+end
+
+SMODS.Blind{
+    key = "blank",
+    atlas = "Reverse_Bosses",
+    pos = {x = 0, y = 8},
+    loc_txt = {
+        name = "The Blank",
+        text = {
+            "Random Boss effect",
+            "activates each hand",
+            "Currently active: #1#"
+        }
+    },
+    dollars = 5,
+    mult = 2,
+    discovered = false,
+    boss = {min = 6},
+    boss_colour = HEX('ECECEC'),
+    set_blind = function(self)
+        G.GAME.blank_played = false
+        G.GAME.blank_obj = Blind(G.GAME.blind.T.x, G.GAME.blind.T.y, G.GAME.blind.T.w, G.GAME.blind.T.h)
+        G.GAME.blank_obj:set_blind(G.P_BLINDS[G.GAME.blank_blind])
+        --G.GAME.blind.boss_colour = G.GAME.blank_obj.boss_colour
+        self.disabled = false
+        return
+    end,
+    loc_vars = function(self, info_queue, center)
+        if G.P_BLINDS[G.GAME.blank_blind] then
+            return {vars = {G.localization.descriptions.Blind[G.GAME.blank_blind].name}}
+        end
+        return {vars = {'[Blind name]'}}
+    end,
+    press_play = function(self)
+        G.GAME.blank_played = true
+        G.GAME.blank_obj:press_play()
+    end,
+    modify_hand = function(self, cards, poker_hands, text, mult, hand_chips)
+        if not self.disabled then
+            if G.GAME.blank_blind == 'bl_flint' then
+                --print('flint')
+                return math.max(math.floor(mult*0.5 + 0.5), 1), math.max(math.floor(hand_chips*0.5 + 0.5), 0), true
+            end
+        end
+        return mult, hand_chips, false
+    end,
+    debuff_hand = function(self, cards, hand, handname, check)
+        if not self.disabled then
+            self.triggered = false
+            if G.GAME.blank_blind == 'bl_psychic' then
+                if #cards < 5 then
+                    self.triggered = true
+                    return true
+                end
+            elseif G.GAME.blank_blind == 'bl_reverse_ansuz' then
+                if handname ~= G.GAME.current_round.most_played_poker_hand then
+                    self.triggered = true
+                    return true
+                end
+            elseif G.GAME.blank_blind == 'bl_ox' then
+                if handname == G.GAME.current_round.most_played_poker_hand then
+                    self.triggered = true
+                    if not check then
+                        ease_dollars(-G.GAME.dollars, true)
+                    end
+                end
+            elseif G.GAME.blank_blind == 'bl_arm' then
+                if G.GAME.hands[handname].level > 1 then
+                    self.triggered = true
+                    if not check then
+                        level_up_hand(G.GAME.blind.children.animatedSprite, handname, nil, -1)
+                        G.GAME.blind:wiggle()
+                    end
+                end
+            end
+        end
+    end,
+    drawn_to_hand = function(self)
+        if not self.disabled then
+            if G.GAME.blank_played then
+                G.GAME.blank_blind = G.GAME.eligible_blinds[math.floor(pseudorandom('blinds')*#G.GAME.eligible_blinds) + 1]
+                G.GAME.blank_obj = Blind(G.GAME.blind.T.x, G.GAME.blind.T.y, G.GAME.blind.T.w, G.GAME.blind.T.h)
+                G.GAME.blank_obj:set_blind(G.P_BLINDS[G.GAME.blank_blind])
+                G.GAME.blind:set_text()
+            end
+            G.GAME.blank_obj:change_colour()
+            --print(G.GAME.blank_obj)
+            --print(G.GAME.blank_played)
+            --print(G.GAME.blank_blind)
+            G.GAME.blank_played = false
+            return
+        end
+    end,
+    stay_flipped = function(area, card)
+        --[[
+        if not G.GAME.blind.disabled then
+            if area == G.hand then
+                if G.GAME.blank_blind == 'bl_wheel' and pseudorandom(pseudoseed('wheel')) < G.GAME.probabilities.normal/7 then
+                    return true
+                elseif G.GAME.blank_blind == 'bl_mark' and card:is_face(true) then
+                    return true
+                elseif G.GAME.blank_blind == 'bl_fish' and G.GAME.blank_played then 
+                    return true
+                end
+            end
+        end
+        ]]
+    end,
+    disable = function(self)
+        --undebuff all cards in deck?
+        self.disabled = true
+        return
+    end,
+}
+
+SMODS.Blind{
+    key = "black",
+    atlas = "Reverse_Bosses",
+    pos = {x = 0, y = 9},
+    loc_txt = {
+        name = "The Void",
+        text = {
+            "Removes {C:attention}Enhancements{} from all",
+            "scored cards after scoring"
+        }
+    },
+    dollars = 5,
+    mult = 2,
+    discovered = false,
+    boss = {min = 6},
+    boss_colour = HEX('252525'),
+    loc_vars = function(self, info_queue, center)
+        return
+    end,
+    disable = function(self)
+        self.disabled = true
+        return
+    end,
 }
 
 function is_rank(card, ranks)
@@ -2855,7 +3258,7 @@ function evaluate_poker_hand_wrapper(hand)
     local best_hand = nil
     for i=1, #hand, 1 do
         words = {}
-        if hand[i].ability.name then
+        if hand[i].ability.name and not hand[i].debuff  then
             for w in hand[i].ability.name:gmatch("([^_]+)") do
                 table.insert(words, w) 
             end

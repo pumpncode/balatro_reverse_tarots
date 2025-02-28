@@ -42,5 +42,15 @@ The D6 - Randomly gives between 1 and 6 xMult<br/>
 Double Down - 1 in 2 chance for this card's xMult to be multiplied by 2 when hand played. Starts at X1, resets at end of round.
 #----------------------------------------------------------------------------------------------<br/>
 Blinds<br/>
-The Left Hand - All cards debuffed while held in hand<br/>
-The Right Hand - All played cards debuffed<br/>
+The Companion (Berkano) - Debuffs all cards in scoring hand (min ante 3)<br/>
+The Pure (Dagaz) - Debuffs all cards held in hand (minimum ante 1)<br/>
+The Change (Perthro) - Shuffles score order of all played cards (and held cards?) (min ante 2)<br/>
+The Passage (Ehwaz) - Scores hands left in hand as if they were the ones played. Scores level as played hand (min ante 3)<br/>
+The Abundant (Jera) - 6x base score required, 2x Hands, and Discards, +2(3?) hand size (min ante 3)<br/>
+The Resistant (Algiz) - Halves Hands and Discards (rounded down, minimum 1, procs before jokers) (min ante 2)<br/>
+The Vision (Ansuz) - Can only play [most played hand] (min ante 5)<br/>
+The Destruction (Hagalaz) - Debuff two cards left in hand on draw (min ante 4)<br/>
+The Blank (Blank Rune) - Triggers a different Boss Blind effect every hand (not compatible with all) (min ante 6)<br/>
+The Void (Black Rune) - Removes enhancements from scored cards after scoring (min ante 6)<br/>
+
+Two Finisher Blinds in the works
