@@ -239,6 +239,8 @@ SMODS.Consumable{
         local highest_level = 0
         local highest_hand = 'High Card'
         for k, v in pairs(G.GAME.hands) do
+            --print(type(G.GAME.hands[k].level))
+            --print(type(highest_level))
             if G.GAME.hands[k].level >= highest_level then
                 highest_hand = k
                 highest_level = G.GAME.hands[k].level
@@ -1048,26 +1050,27 @@ SMODS.Consumable{
     },
     loc_vars = function(self, info_queue, center)
         local money = 0
-        for i = 1, #G.hand.cards do
-            if G.hand.cards[i].ability.set then
-                money = money + G.hand.cards[i].sell_cost
-                if G.hand.cards[i].edition then
-                    money = money + 1
-                end
-                if G.hand.cards[i].label ~= "Base Card" then
-                    money = money + 1
-                end
-                if G.hand.cards[i].ability.seal then
-                    money = money + 1
+        if G.hand then
+            for i = 1, #G.hand.cards do
+                if G.hand.cards[i].ability.set then
+                    money = money + G.hand.cards[i].sell_cost
+                    if G.hand.cards[i].edition then
+                        money = money + 1
+                    end
+                    if G.hand.cards[i].label ~= "Base Card" then
+                        money = money + 1
+                    end
+                    if G.hand.cards[i].ability.seal then
+                        money = money + 1
+                    end
                 end
             end
+            money = math.min(money, 50)
+            if #G.hand.cards >= 1 then
+                return {vars = {center.ability.context.max_money, money}}
+            end
         end
-        money = math.min(money, 50)
-        if #G.hand.cards >= 1 then
-            return {vars = {center.ability.context.max_money, money}}
-        else
-            return {vars = {center.ability.context.max_money, 0}}
-        end
+        return {vars = {center.ability.context.max_money, 0}}
     end,
     can_use = function(self, card)
         if #G.hand.cards >= 1 then
