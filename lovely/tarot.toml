@@ -61,46 +61,6 @@ end
 match_indent = true
 times = 2
 
-
-# adds Card:is_secondary_suit(),  for secondary suit card calculations
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''function Card:is_suit(suit, bypass_debuff, flush_calc)'''
-position = "before"
-payload = '''
-function Card:is_secondary_suit(suit)
-    local words = {}
-    for w in self.ability.name:gmatch("([^_]+)") do
-        table.insert(words, w) 
-    end
-    if words[3] == 'secondary' and not self.debuff then
-        local new_suit = words[4]:gsub("^%l", string.upper) .. 's'
-        if next(find_joker('Smeared Joker')) and (new_suit == 'Hearts' or new_suit == 'Diamonds') == (suit == 'Hearts' or suit == 'Diamonds') then
-            return true
-        else
-            return new_suit == suit
-        end
-    end
-    return false
-end
-
-function Card:has_secondary_suit()
-    local words = {}
-    for w in self.ability.name:gmatch("([^_]+)") do
-        table.insert(words, w) 
-    end
-    if words[3] == 'secondary' and not self.debuff then
-        return true
-    end
-    return false
-end
-
-'''
-match_indent = true
-times = 1
-
-
 # fixes Flower Pot and Seeing Double
 [[patches]]
 [patches.pattern]

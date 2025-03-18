@@ -13,7 +13,7 @@ SMODS.ConsumableType {
         collection = "Zodiac Cards"
     },
     collection_rows = {7, 6},
-    shop_rate = 2,
+    shop_rate = 0,
     default = "c_reverse_aquarius",
 }
 
@@ -72,9 +72,6 @@ SMODS.Consumable{
             "{C:mult}+#3#{} Mult and",
             "{C:chips}+#4#{} chips",
         },
-    },
-    pools = {
-        ["Planet"] = true
     },
     config = {hand_type = 'reverse_parity'},
     loc_vars = function(self, info_queue, center)

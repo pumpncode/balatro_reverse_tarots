@@ -198,6 +198,33 @@ function copy(obj, seen) --unused
     return res
 end
 
+function Card:is_secondary_suit(suit)
+    local words = {}
+    for w in self.ability.name:gmatch("([^_]+)") do
+        table.insert(words, w) 
+    end
+    if words[3] == 'secondary' and not self.debuff then
+        local new_suit = words[4]:gsub("^%l", string.upper) .. 's'
+        if next(find_joker('Smeared Joker')) and (new_suit == 'Hearts' or new_suit == 'Diamonds') == (suit == 'Hearts' or suit == 'Diamonds') then
+            return true
+        else
+            return new_suit == suit
+        end
+    end
+    return false
+end
+
+function Card:has_secondary_suit()
+    local words = {}
+    for w in self.ability.name:gmatch("([^_]+)") do
+        table.insert(words, w) 
+    end
+    if words[3] == 'secondary' and not self.debuff then
+        return true
+    end
+    return false
+end
+
 -- eval evaluate_poker_hand_wrapper(G.hand.highlighted, 1)
 
 function new_straight(hand) --unused
