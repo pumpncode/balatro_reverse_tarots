@@ -3,6 +3,7 @@ assert(SMODS.load_file('reverse_jokers.lua'))()
 assert(SMODS.load_file('reverse_blinds.lua'))()
 assert(SMODS.load_file('reverse_tarot_cards.lua'))()
 assert(SMODS.load_file('reverse_zodiac.lua'))()
+assert(SMODS.load_file('deck_skins.lua'))()
 
 SMODS.Atlas{
     key = 'Reverse_Jokers',
