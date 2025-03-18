@@ -1073,8 +1073,10 @@ SMODS.Consumable{
         return {vars = {center.ability.context.max_money, 0}}
     end,
     can_use = function(self, card)
-        if #G.hand.cards >= 1 then
-            return true
+        if G.hand then
+            if #G.hand.cards >= 1 then
+                return true
+            end
         end
     end,
     use = function(self, card, area, copier)
