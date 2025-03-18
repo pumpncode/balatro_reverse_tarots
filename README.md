@@ -1,7 +1,8 @@
 Documentation of all added cards:<br/>
 #-----------------------------------------------------------------------------------------<br/>
 Tarots<br/>
-Reverse Fool - Creates an inverted version of the last Tarot card used (regular becomes reverse, reverse becomes regular. Planets spawn as per normal Fool)<br/>
+Reverse Fool - Creates an inverted version of the last Tarot card used (regular becomes reverse, reverse becomes regular. Planets
+convert to Zodiacs and vice versa)<br/>
 Reverse Magician - Enhances up to 2 selected cards into Loaded card (1/5 for $6, 1/15 for +60 Mult)<br/>
 Reverse High Priestess - Creates a Planet card from your highest levelled hand(s)<br/>
 Reverse Empress - Create up to two Held Mult cards (+6 Mult when held in hand)<br/>
@@ -24,6 +25,27 @@ Reverse Sun - Enhances up to 2 cards to Secondary Hearts (counts as both base su
 Reverse Judgement -Creates a random Negative Joker with an Ephemeral sticker (perishes in 3 Rounds, has 0 sell value)<br/>
 Reverse World - Enhances up to 2 cards to Secondary Spades (counts as both base suit and Spades)<br/>
 #----------------------------------------------------------------------------------------------<br/>
+Planet<br/>
+Janus - Levels up Parity (+2 Mult, +25 Chip)<br/>
+
+Hand<br/>
+Parity - Play five cards that are either all even or all odd (excludes face cards)<br/>
+#----------------------------------------------------------------------------------------------<br/>
+Zodiacs (NOT FULLY IMPLEMENTED)<br/>
+Aquarius - <br/>
+Pisces - <br/>
+Aries - <br/>
+Taurus - <br/>
+Gemini - <br/>
+Cancer - <br/>
+Leo - <br/>
+Virgo - <br/>
+Libra - <br/>
+Scorpio - <br/>
+Sagittarius - <br/>
+Capricorn - <br/>
+Ophiuchus - <br/>
+#----------------------------------------------------------------------------------------------<br/>
 Jokers<br/>
 Rekoj - Gives -4 Mult<br/>
 Counterfeit Bill - Gain $5 at the end of round. Increases by $1 per Loaded card triggered (Enhancement gated)<br/>
@@ -39,7 +61,20 @@ Cartomancer? - Reverse Tarot version of Cartomancer<br/>
 Card Reading - Creates a Reverse Tarot when hand played with money over interest cap<br/>
 Dead Cat - Sets hands per round to 1, cannot be overwritten. Prevents death if chips scored are at least 50% of required amount (activates up to 9 times, then destroys itself)<br/>
 The D6 - Randomly gives between 1 and 6 xMult<br/>
-Double Down - 1 in 2 chance for this card's xMult to be multiplied by 2 when hand played. Starts at X1, resets at end of round.
+Double Down - 1 in 2 chance for this card's xMult to be multiplied by 2 when hand played. Starts at X1, resets at end of round<br/>
+Daily Double - X2 of a specific value depending on the day of the week<br/>
+
+<ul>
+<li>Sunday: X2 Mult</li>
+<li>Monday: X2 Money per remaining hand</li>
+<li>Tuesday: X2 Packs appear per shop</li>
+<li>Wednesday: X2 Consumable slots</li>
+<li>Thursday: X2 Level increase for planet card</li>
+<li>Friday: X2 chance for cards to have editions</li>
+<li>Saturday: X2 Chip</li>
+</ul>
+Harmonic Convergence - 1/N chance to gain x.25 Mult when hand scored, starts at X1 Mult.  N begins at 1 and increases by 1 for each successful trigger<br/>
+Nazuna - Gains X.1 Mult per scoring enhanced card. Does not remove enhancement<br/>
 #----------------------------------------------------------------------------------------------<br/>
 Blinds<br/>
 The Companion (Berkano) - Debuffs all cards in scoring hand (min ante 3)<br/>
@@ -53,4 +88,6 @@ The Destruction (Hagalaz) - Debuff two cards left in hand on draw (min ante 4)<b
 The Blank (Blank Rune) - Triggers a different Boss Blind effect every hand (not compatible with all) (min ante 6)<br/>
 The Void (Black Rune) - Removes enhancements from scored cards after scoring (min ante 6)<br/>
 
-Two Finisher Blinds in the works
+Finisher Blinds (NOT FULLY IMPLEMENTED)<br/>
+The Beast - <br/>
+The Delirium - <br/>

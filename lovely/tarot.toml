@@ -2,6 +2,16 @@
 version = "1.0.0"
 priority = 0
 
+# adds Zodiac to most recently used tarot/Planet
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = '''if card.config.center.set == 'Tarot' or card.config.center.set == 'Planet' then'''
+position = "at"
+payload = '''if card.config.center.set == 'Tarot' or card.config.center.set == 'Planet' or card.config.center.set == 'Zodiac' then'''
+match_indent = true
+times = 1
+
 # fixes tarot pools for emperors
 [[patches]]
 [patches.pattern]
@@ -132,36 +142,6 @@ if context.scoring_hand[i]:has_secondary_suit() then
     if context.scoring_hand[i]:is_suit('Clubs') and suits["Clubs"] == 0  then suits["Clubs"] = suits["Clubs"] + 1 end
 end
 '''
-match_indent = true
-times = 1
-
-
-# Patching the get_poker_hand_info
-[[patches]]
-[patches.pattern]
-target = "functions/state_events.lua"
-pattern = '''local poker_hands = evaluate_poker_hand(_cards)'''
-position = "at"
-payload = '''local poker_hands = evaluate_poker_hand_wrapper(_cards)
-print("testing")'''
-match_indent = true
-times = 1
-
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''local eval = evaluate_poker_hand(args.cards)'''
-position = "at"
-payload = '''local eval = evaluate_poker_hand_wrapper(args.cards)'''
-match_indent = true
-times = 1
-
-[[patches]]
-[patches.pattern]
-target = '=[SMODS _ "src/overrides.lua"]'
-pattern = '''local poker_hands = evaluate_poker_hand(_cards)'''
-position = "at"
-payload = '''local poker_hands = evaluate_poker_hand_wrapper(_cards)'''
 match_indent = true
 times = 1
 
@@ -440,6 +420,87 @@ end
 match_indent = true
 times = 1
 
+# Daily Double patches
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''G.GAME.edition_rate = center_table.extra'''
+position = "at"
+payload = '''G.GAME.edition_rate = G.GAME.edition_rate * 2'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''G.consumeables.config.card_limit = G.consumeables.config.card_limit + 1'''
+position = "at"
+payload = '''G.consumeables.config.card_limit = G.consumeables.config.card_limit + 1 * ((G.GAME.day == 7 and (2 ^ #find_joker("j_reverse_daily_double"))) or 1)'''
+match_indent = true
+times = 2
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.consumeable then
+                G.consumeables.config.card_limit = G.consumeables.config.card_limit - self.edition.card_limit'''
+position = "at"
+payload = '''if self.ability.consumeable then
+                G.consumeables.config.card_limit = G.consumeables.config.card_limit - self.edition.card_limit * ((G.GAME.day == 4 and (2 ^ #find_joker("j_reverse_daily_double"))) or 1)'''
+match_indent = true
+times = 2
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''G.consumeables.config.card_limit = G.consumeables.config.card_limit + self.edition.card_limit'''
+position = "at"
+payload = '''G.consumeables.config.card_limit = G.consumeables.config.card_limit + self.edition.card_limit * ((G.GAME.day == 4 and (2 ^ #find_joker("j_reverse_daily_double"))) or 1)'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''amount = amount or 1'''
+position = "after"
+payload = '''amount = amount * ((G.GAME.day == 5 and (2 ^ #find_joker("j_reverse_daily_double"))) or 1)'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''check_for_unlock({type = 'interest_streak'})
+        dollars = dollars + G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5), G.GAME.interest_cap/5)
+    end'''
+position = "after"
+payload = '''
+for _, area in ipairs(SMODS.get_card_areas('jokers')) do
+            for _, _card in ipairs(area.cards) do
+            local ret = math.min(dollars, 40)
+            if G.GAME.day == 2 and _card.ability.name == "j_reverse_daily_double" then
+                i = i+1
+                add_round_eval_row({dollars = ret, bonus = true, name='joker'..i, pitch = pitch, card = _card})
+                pitch = pitch + 0.06
+                dollars = dollars + ret
+            end
+        end
+    end'''
+match_indent = true
+times = 1
+
+# Planet collection screen patch
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/game_object.lua"]'
+pattern = '''key = 'Planet',
+collection_rows = { 6, 6 },'''
+position = "at"
+payload = '''key = 'Planet',
+collection_rows = { 7, 6 },'''
+match_indent = true
+times = 1
 
 # Blind patches
 # Ehwaz (incomplete)
@@ -480,6 +541,20 @@ if G.GAME.blind.name == 'bl_reverse_blank' then
 end
 '''
 
+# Beast on reload mid-boss
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "G.GAME.blind:load(saveTable.BLIND)"
+position = 'after'
+match_indent = true
+payload = '''
+if G.GAME.blind.name == 'bl_reverse_final_beast' then
+    G.GAME.blank_obj = Blind(G.GAME.blind.T.x, G.GAME.blind.T.y, G.GAME.blind.T.w, G.GAME.blind.T.h)
+    G.GAME.blank_obj:set_blind(G.P_BLINDS[G.GAME.beast_wave])
+end
+'''
+
 # Black
 [[patches]]
 [patches.pattern]
@@ -498,5 +573,111 @@ if G.GAME.blind.name == 'bl_reverse_black' then
                                         end
                                     }))
     end
+end
+'''
+
+# Pestilence
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "-- TARGET: effects after hand evaluation"
+position = 'after'
+match_indent = true
+payload = '''
+if (G.GAME.beast_wave == 'bl_reverse_final_pestilence' or G.GAME.blind.name == 'bl_reverse_final_pestilence') and not G.GAME.blind.disabled then
+    for k, v in pairs(G.play.cards) do
+        SMODS.debuff_card(v, true, 'bl_reverse_final_pestilence')
+                                    G.E_MANAGER:add_event(Event({
+                                        func = function()
+                                            v:juice_up()
+                                            return true
+                                        end
+                                    }))
+    end
+end
+'''
+
+# Death
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "local final_scoring_hand = {}"
+position = 'after'
+match_indent = true
+payload = '''
+-- insert this BEFORE card scoring?
+        local cards_destroyed = {}
+        -- The Reaper effect
+        if G.GAME.beast_wave == 'bl_reverse_final_death' or G.GAME.blind.name == 'bl_reverse_final_death' then
+            if SMODS.shatters(G.play.cards[1]) then
+                G.play.cards[1].shattered = true
+            else
+                G.play.cards[1].destroyed = true
+            end
+            cards_destroyed[#cards_destroyed+1] = G.play.cards[1]
+            if cards_destroyed[1] then
+                SMODS.calculate_context({scoring_hand = scoring_hand, remove_playing_cards = true, removed = cards_destroyed})
+            end
+            
+            local glass_shattered = {}
+            for k, v in ipairs(cards_destroyed) do
+                if v.shattered then glass_shattered[#glass_shattered+1] = v end
+            end
+            
+            for i=1, #cards_destroyed do
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        if cards_destroyed[i].shattered then
+                            cards_destroyed[i]:shatter()
+                        else
+                            cards_destroyed[i]:start_dissolve()
+                        end
+                    return true
+                    end
+                }))
+            end
+            table.remove(G.play.cards, 1)
+        end
+'''
+
+# Beast on wave transition
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "if G.GAME.chips - G.GAME.blind.chips >= 0 or G.GAME.current_round.hands_left < 1 then"
+position = 'before'
+match_indent = true
+payload = '''
+--Change Beast wave
+if G.GAME.blind.name == 'bl_reverse_final_beast' and G.GAME.chips - G.GAME.blind.chips >= 0 and not (G.GAME.beast_wave == 'bl_reverse_final_beast') then
+    local current_blind = 1
+    for k, v in pairs(G.GAME.beast_blinds) do
+        if v == G.GAME.beast_wave then
+            current_blind = k
+        end
+    end
+    G.GAME.chips = 0
+    for k, v in pairs(G.jokers.cards) do
+        if v.debuff then
+            v:set_debuff(false)
+        end
+    end
+    G.GAME.beast_wave = G.GAME.beast_blinds[current_blind + 1]
+    G.GAME.blank_obj:defeat()
+    G.GAME.blank_obj = Blind(G.GAME.blind.T.x, G.GAME.blind.T.y, G.GAME.blind.T.w, G.GAME.blind.T.h)
+    G.GAME.blank_obj:set_blind(G.P_BLINDS[G.GAME.beast_wave])
+    G.GAME.blank_obj:change_colour()
+    if G.GAME.beast_wave == 'bl_reverse_final_war' then
+        G.GAME.beast_prepped = true
+    else
+        for k, v in pairs(G.jokers.cards) do
+            if v.debuff then
+                v:set_debuff(false)
+            end
+        end
+        G.GAME.beast_prepped = nil
+    end
+    G.STATE_COMPLETE = false
+    return true
 end
 '''
