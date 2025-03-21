@@ -432,7 +432,7 @@ SMODS.Joker{
         name = "Rewrite",
         text = {
             "This Joker gains {X:mult,C:white}X#1#{} Mult",
-            "when an {C:attention}Enhanced{} card",
+            "when a selected {C:attention}Enhanced{} card",
             "is {C:attention}Enhanced{} again",
             "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
         }
@@ -767,7 +767,7 @@ SMODS.Joker{ --To add: info_queue for effects.
             color = "dark_edition"
             self.blueprint_compat = false
         else
-            effect = "Chip"
+            effect = "Chips"
             color = "chips"
             self.blueprint_compat = true
         end
@@ -840,7 +840,7 @@ SMODS.Joker{
         name = "Negative",
         text={
             "First played {C:attention}face",
-            "card gives {X:chips,C:white} X#1# {} Chip",
+            "card gives {X:chips,C:white} X#1# {} Chips",
             "when scored",
         },
     },

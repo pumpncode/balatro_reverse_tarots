@@ -107,6 +107,10 @@ function is_omnirank(card)
     return false
 end
 
+function round(val)
+    return math.floor(val + 0.5)
+end
+
 local hand_hook = evaluate_poker_hand
 
 function evaluate_poker_hand(hand)

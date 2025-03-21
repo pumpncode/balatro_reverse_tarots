@@ -3,7 +3,7 @@ Documentation of all added cards:<br/>
 Tarots<br/>
 Reverse Fool - Creates an inverted version of the last Tarot card used (regular becomes reverse, reverse becomes regular. Planets
 convert to Zodiacs and vice versa)<br/>
-Reverse Magician - Enhances up to 2 selected cards into Loaded card (1/5 for $6, 1/15 for +60 Mult)<br/>
+Reverse Magician - Enhances up to 2 selected cards into Counterfeit card (1/5 for $6, 1/15 for +60 Mult)<br/>
 Reverse High Priestess - Creates a Planet card from your highest levelled hand(s)<br/>
 Reverse Empress - Create up to two Held Mult cards (+6 Mult when held in hand)<br/>
 Reverse Emperor - Create two random Reverse Tarot cards<br/>
@@ -31,24 +31,33 @@ Janus - Levels up Parity (+2 Mult, +25 Chip)<br/>
 Hand<br/>
 Parity - Play five cards that are either all even or all odd (excludes face cards)<br/>
 #----------------------------------------------------------------------------------------------<br/>
-Zodiacs (NOT FULLY IMPLEMENTED)<br/>
-Aquarius - <br/>
-Pisces - <br/>
-Aries - <br/>
-Taurus - <br/>
-Gemini - <br/>
-Cancer - <br/>
-Leo - <br/>
-Virgo - <br/>
-Libra - <br/>
-Scorpio - <br/>
-Sagittarius - <br/>
-Capricorn - <br/>
-Ophiuchus - <br/>
+Zodiacs<br/>
+Aquarius - Mercury - Add one Stone and one Marble card to hand<br/>
+Pisces - Venus - Applies random enhnacement to selected card, and one other of the same rank in your full deck<br/>
+Aries - Earth - Adds one copy of selected card to hand <br/>
+Taurus - Mars - Enhances one card to Iridium (cannot be selected, played, or discarded. Gives x1.5 Mult and x1.5 Chips)<br/>
+Gemini - Jupiter - All cards in your deck with the same rank of the selected card, become that suit<br/>
+Cancer - Saturn - Copies enhancement, seal, and edition from the right card to the left, if it has one<br/>
+Leo - Uranus - Destroys three random cards in hand<br/>
+Virgo - Neptune - Applies a random seal to the selected card<br/>
+Libra - Pluto - Converts all cards in hand to their average rank<br/>
+Scorpio - Planet X - If selected card is enhanced, apply its enhancement to two random unenhanced cards in hand<br/>
+Sagittarius - Ceres - Destroys selected card and two others in your full deck of the same suit<br/>
+Capricorn - Eris - Select up to three cards, converts the left two into the rank of the rightmost<br/>
+Ophiuchus - Janus - Gives up to two random Zodiac cards<br/>
+
+To follow:<br/>
+
+<ul>
+<li>Zodiac Seal</li>
+<li>Astrology Packs</li>
+<li>Constellation Skip Tag</li>
+<li>Zodiac Vouchers</li>
+</ul>
 #----------------------------------------------------------------------------------------------<br/>
 Jokers<br/>
 Rekoj - Gives -4 Mult<br/>
-Counterfeit Bill - Gain $5 at the end of round. Increases by $1 per Loaded card triggered (Enhancement gated)<br/>
+Counterfeit Bill - Gain $5 at the end of round. Increases by $1 per Counterfeit card triggered (Enhancement gated)<br/>
 Wild Joker - Gains x.1 Mult per card in deck with more than one suit (Enhancement gated)<br/>
 Omni Joker - Scored Omnirank cards give x1.5 Chip when scored (Enhancement gated)<br/>
 Crystal Joker - Gains x.75 Chip per Crystal card broken (Enhancement gated, unlock: have 5 Crystal cards in full deck)<br/>
@@ -79,7 +88,7 @@ Nazuna - Gains X.1 Mult per scoring enhanced card. Does not remove enhancement<b
 Blinds<br/>
 The Companion (Berkano) - Debuffs all cards in scoring hand (min ante 3)<br/>
 The Pure (Dagaz) - Debuffs all cards held in hand (minimum ante 1)<br/>
-The Change (Perthro) - Shuffles score order of all played cards (and held cards?) (min ante 2)<br/>
+The Change (Perthro) - Shuffles score order of all played cards (and held cards) (min ante 2)<br/>
 The Passage (Ehwaz) - Scores hands left in hand as if they were the ones played. Scores level as played hand (min ante 3)<br/>
 The Abundant (Jera) - 6x base score required, 2x Hands, and Discards, +2(3?) hand size (min ante 3)<br/>
 The Resistant (Algiz) - Halves Hands and Discards (rounded down, minimum 1, procs before jokers) (min ante 2)<br/>

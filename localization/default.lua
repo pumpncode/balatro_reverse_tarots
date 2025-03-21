@@ -10,7 +10,7 @@ return {
                     "Wednesday - {X:tarot,C:white}X2{} Consumable slots",
                     "Thursday - {X:planet,C:white}X2{} levels per {C:planet}planet{} card",
                     "Friday - {X:dark_edition,C:white}X2{} chance for cards to have {C:dark_edition}editions{}",
-                    "Saturday - {X:chips,C:white}X2{} Chip"
+                    "Saturday - {X:chips,C:white}X2{} Chips"
                 }
             },
         },

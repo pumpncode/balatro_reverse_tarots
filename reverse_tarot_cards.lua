@@ -8,7 +8,7 @@ SMODS.Consumable{
         text = {
             "Creates {C:attention}inverted{} version of last",
             "{C:tarot}Tarot{}, card used this run.",
-            "{C:planet}Planets{} become {V:1}Zodiacs{} and vice versa",
+            "{C:planet}Planets{} become {C:zodiac}Zodiacs{} and vice versa",
             "converts in collection order",
             "{s:0.8,C:tarot}The Fool(?){s:0.8} excluded",
             "{C:attention}Created card: #1#{}"
@@ -57,12 +57,12 @@ SMODS.Consumable{
         end
         if new_card then
             if new_card.loc_txt then
-                return {vars = {new_card.loc_txt.name, colours = {HEX("6D1F68")}}}
+                return {vars = {new_card.loc_txt.name}}
             else
-                return {vars = {new_card.name, colours = {HEX("6D1F68")}}}
+                return {vars = {new_card.name}}
             end
         end
-        return {vars = {nil, colours = {HEX("6D1F68")}}}
+        return {vars = {"none"}}
     end,
     can_use = function(self, card)
         local fool_c = G.GAME.last_tarot_planet and G.P_CENTERS[G.GAME.last_tarot_planet] or nil
@@ -949,12 +949,12 @@ SMODS.Consumable{
         _suit = _suit or 'S'; _rank = _rank or 'A'
         local cen_pool = {}
         for k, v in pairs(G.P_CENTER_POOLS["Enhanced"]) do
-            if v.key ~= 'm_stone' then 
+            if v.key ~= 'm_stone' and v.key ~= 'm_reverse_marble' then 
                 cen_pool[#cen_pool+1] = v
             end
         end
         create_playing_card({front = G.P_CARDS[_suit..'_'.._rank], center = pseudorandom_element(cen_pool, pseudoseed('spe_card'))}, G.hand, nil, i ~= 1, {G.C.SECONDARY_SET.Spectral})
-        playing_card_joker_effects(new_cards)
+        playing_card_joker_effects({true})
     end
 }
 

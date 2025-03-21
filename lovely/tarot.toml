@@ -12,7 +12,39 @@ payload = '''if card.config.center.set == 'Tarot' or card.config.center.set == '
 match_indent = true
 times = 1
 
-# fixes tarot pools for emperors
+# makes iridium unselectable
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''if #self.highlighted >= self.config.highlighted_limit then
+            card:highlight(false)'''
+position = "at"
+payload = '''if #self.highlighted >= self.config.highlighted_limit or SMODS.has_enhancement(card, "m_reverse_iridium") then
+            card:highlight(false)'''
+match_indent = true
+times = 1
+
+# all iridium in hand kills you
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''if #G.hand.cards < 1 and #G.deck.cards < 1 and #G.play.cards < 1 then'''
+position = "before"
+payload = '''local count = 0
+for k,v in ipairs(G.hand.cards) do
+    if SMODS.has_enhancement(v, "m_reverse_iridium") then
+        count = count + 1
+    end
+end
+if count == #G.hand.cards then
+    end_round()
+end
+'''
+match_indent = true
+times = 1
+
+
+# fixes tarot pools for emperors and vagabonds
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
