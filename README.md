@@ -46,14 +46,18 @@ Sagittarius - Ceres - Destroys selected card and two others in your full deck of
 Capricorn - Eris - Select up to three cards, converts the left two into the rank of the rightmost<br/>
 Ophiuchus - Janus - Gives up to two random Zodiac cards<br/>
 
+Appears in Astrology Packs<bt/>
+
 To follow:<br/>
 
 <ul>
-<li>Zodiac Seal</li>
-<li>Astrology Packs</li>
+<li>Magenta Seal</li>
 <li>Constellation Skip Tag</li>
 <li>Zodiac Vouchers</li>
 </ul>
+#----------------------------------------------------------------------------------------------<br/>
+Spectrals<br/>
+ - Applies a Magenta Seal to the selected card<br/>
 #----------------------------------------------------------------------------------------------<br/>
 Jokers<br/>
 Rekoj - Gives -4 Mult<br/>

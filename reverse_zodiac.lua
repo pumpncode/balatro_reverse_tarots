@@ -13,7 +13,7 @@ SMODS.ConsumableType {
         collection = "Zodiac Cards"
     },
     collection_rows = {7, 6},
-    shop_rate = 1,
+    shop_rate = 0,
     default = "c_reverse_aquarius",
 }
 
@@ -57,6 +57,122 @@ SMODS.PokerHand {
         end
         return {}
     end
+}
+
+SMODS.Booster{
+    key = "zodiac_1",
+    atlas = "Zodiac_Booster",
+    pos = {x = 0, y = 0},
+    loc_txt = {
+        name = "Astrology Pack",
+        group_name = "Zodiac Pack",
+        text = {
+            "Choose {C:attention}#1#{} of up to",
+            "{C:attention}#2#{C:zodiac} Zodiac{} cards to",
+            "be used immediately",
+        }
+    },
+    cost = 4,
+    weight = 1,
+    draw_hand = true,
+    config = {extra = 3, choose = 1},
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.choose, center.ability.extra}}
+    end,
+    create_card = function (self, card, i) 
+        return create_card("Zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
+    end,
+    ease_background_colour = function(self)
+        ease_colour(HEX("380335"), HEX("96108D"))
+        ease_background_colour({ new_colour = HEX("380335"), special_colour = HEX("96108D"), contrast = 2 })
+    end,
+}
+
+SMODS.Booster{
+    key = "zodiac_2",
+    atlas = "Zodiac_Booster",
+    pos = {x = 1, y = 0},
+    loc_txt = {
+        name = "Astrology Pack",
+        group_name = "Zodiac Pack",
+        text = {
+            "Choose {C:attention}#1#{} of up to",
+            "{C:attention}#2#{C:zodiac} Zodiac{} cards to",
+            "be used immediately",
+        }
+    },
+    cost = 4,
+    weight = 1,
+    draw_hand = true,
+    config = {extra = 3, choose = 1},
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.choose, center.ability.extra}}
+    end,
+    create_card = function (self, card, i) 
+        return create_card("Zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
+    end,
+    ease_background_colour = function(self)
+        ease_colour(HEX("380335"), HEX("96108D"))
+        ease_background_colour({ new_colour = HEX("380335"), special_colour = HEX("96108D"), contrast = 2 })
+    end,
+}
+
+SMODS.Booster{
+    key = "zodiac_3",
+    atlas = "Zodiac_Booster",
+    pos = {x = 2, y = 0},
+    loc_txt = {
+        name = "Jumbo Astrology Pack",
+        group_name = "Zodiac Pack",
+        text = {
+            "Choose {C:attention}#1#{} of up to",
+            "{C:attention}#2#{C:zodiac} Zodiac{} cards to",
+            "be used immediately",
+        }
+    },
+    cost = 6,
+    weight = 1,
+    draw_hand = true,
+    config = {extra = 5, choose = 1},
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.choose, center.ability.extra}}
+    end,
+    create_card = function (self, card, i) 
+        return create_card("Zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
+    end,
+    ease_background_colour = function(self)
+        ease_colour(HEX("380335"), HEX("96108D"))
+        ease_background_colour({ new_colour = HEX("380335"), special_colour = HEX("96108D"), contrast = 2 })
+    end,
+}
+
+SMODS.Booster{
+    key = "zodiac_4",
+    atlas = "Zodiac_Booster",
+    pos = {x = 3, y = 0},
+    loc_txt = {
+        name = "Mega Astrology Pack",
+        group_name = "Zodiac Pack",
+        text = {
+            "Choose {C:attention}#1#{} of up to",
+            "{C:attention}#2#{C:zodiac} Zodiac{} cards to",
+            "be used immediately",
+        }
+    },
+    cost = 8,
+    weight = 1,
+    draw_hand = true,
+    config = {extra = 5, choose = 2},
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.choose, center.ability.extra}}
+    end,
+    create_card = function (self, card, i) 
+        return create_card("Zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
+    end,
+    ease_background_colour = function(self)
+        ease_colour(HEX("380335"), HEX("96108D"))
+        ease_background_colour({ new_colour = HEX("380335"), special_colour = HEX("96108D"), contrast = 2 })
+    end,
 }
 
 SMODS.Consumable{
@@ -512,7 +628,8 @@ SMODS.Consumable{
         for i=1, #G.hand.highlighted do
             G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function()
                 if G.hand.highlighted[i] ~= rightmost then
-                    if not rightmost.config.center.key == "c_base" then
+                    print(rightmost.config.center.key)
+                    if rightmost.config.center.key ~= "c_base" then
                         G.hand.highlighted[i]:set_ability(rightmost.config.center.key)
                     end
                     if rightmost.edition then

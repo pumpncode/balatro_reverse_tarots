@@ -1,7 +1,7 @@
 SMODS.Enhancement{
     key = "held_bonus",
     atlas = "New_Enhance",
-    pos = {x = 2, y = 5},
+    pos = {x = 2, y = 0},
     loc_txt={
         name="Held Bonus Card",
         text = {
@@ -28,7 +28,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "held_mult",
     atlas = "New_Enhance",
-    pos = {x = 1, y = 5},
+    pos = {x = 1, y = 0},
     loc_txt={
         name="Held Mult Card",
         text = {
@@ -55,7 +55,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "omnirank",
     atlas = "New_Enhance",
-    pos = {x = 3, y = 5},
+    pos = {x = 3, y = 0},
     loc_txt={
         name="Omnirank Card",
         text = {
@@ -72,16 +72,16 @@ SMODS.Enhancement{
         if card.base then
             card.children.center.atlas = G.ASSET_ATLAS['reverse_New_Enhance']
             if card.base.suit == "Hearts" then
-                card.children.center:set_sprite_pos({x = 3, y = 5})
+                card.children.center:set_sprite_pos({x = 3, y = 0})
             elseif card.base.suit == "Clubs" then
-                card.children.center:set_sprite_pos({x = 4, y = 5})
+                card.children.center:set_sprite_pos({x = 4, y = 0})
             elseif card.base.suit == "Diamonds" then
-                card.children.center:set_sprite_pos({x = 5, y = 5})
+                card.children.center:set_sprite_pos({x = 5, y = 0})
             elseif card.base.suit == "Spades" then
                 if G.SETTINGS.CUSTOM_DECK.Collabs.Spades == "reverse_ourple" then
-                    card.children.center:set_sprite_pos({x = 6, y = 7})
+                    card.children.center:set_sprite_pos({x = 6, y = 2})
                 else
-                    card.children.center:set_sprite_pos({x = 6, y = 5})
+                    card.children.center:set_sprite_pos({x = 6, y = 0})
                 end
             end
         end
@@ -90,16 +90,16 @@ SMODS.Enhancement{
         if card.base then
             card.children.center.atlas = G.ASSET_ATLAS['reverse_New_Enhance']
             if card.base.suit == "Hearts" then
-                card.children.center:set_sprite_pos({x = 3, y = 5})
+                card.children.center:set_sprite_pos({x = 3, y = 0})
             elseif card.base.suit == "Clubs" then
-                card.children.center:set_sprite_pos({x = 4, y = 5})
+                card.children.center:set_sprite_pos({x = 4, y = 0})
             elseif card.base.suit == "Diamonds" then
-                card.children.center:set_sprite_pos({x = 5, y = 5})
+                card.children.center:set_sprite_pos({x = 5, y = 0})
             elseif card.base.suit == "Spades" then
                 if G.SETTINGS.CUSTOM_DECK.Collabs.Spades == "reverse_ourple" then
-                    card.children.center:set_sprite_pos({x = 6, y = 7})
+                    card.children.center:set_sprite_pos({x = 6, y = 2})
                 else
-                    card.children.center:set_sprite_pos({x = 6, y = 5})
+                    card.children.center:set_sprite_pos({x = 6, y = 0})
                 end
             end
         end
@@ -109,7 +109,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "crystal",
     atlas = "New_Enhance",
-    pos = {x = 1, y = 6},
+    pos = {x = 1, y = 1},
     loc_txt={
         name="Crystal Card",
         text = {
@@ -147,7 +147,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "copper",
     atlas = "New_Enhance",
-    pos = {x = 0, y = 6},
+    pos = {x = 0, y = 1},
     loc_txt={
         name="Copper Card",
         text = {
@@ -174,7 +174,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "marble",
     atlas = "New_Enhance",
-    pos = {x = 0, y = 7},
+    pos = {x = 0, y = 2},
     loc_txt={
         name="Marble Card",
         text = {
@@ -204,7 +204,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "pyrite",
     atlas = "New_Enhance",
-    pos = {x = 2, y = 6},
+    pos = {x = 2, y = 1},
     loc_txt={
         name="Pyrite Card",
         text = {
@@ -236,7 +236,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "counterfeit",
     atlas = "New_Enhance",
-    pos = {x = 0, y = 5},
+    pos = {x = 0, y = 0},
     loc_txt={
         name="Counterfeit Card",
         text = {
@@ -292,7 +292,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "secondary_heart",
     atlas = "New_Enhance",
-    pos = {x = 3, y = 6},
+    pos = {x = 3, y = 1},
     loc_txt={
         name="Secondary Heart",
         text = {
@@ -305,7 +305,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "secondary_club",
     atlas = "New_Enhance",
-    pos = {x = 4, y = 6},
+    pos = {x = 4, y = 1},
     loc_txt={
         name="Secondary Club",
         text = {
@@ -318,7 +318,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "secondary_diamond",
     atlas = "New_Enhance",
-    pos = {x = 5, y = 6},
+    pos = {x = 5, y = 1},
     loc_txt={
         name="Secondary Diamond",
         text = {
@@ -331,7 +331,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "secondary_spade",
     atlas = "New_Enhance",
-    pos = {x = 6, y = 6},
+    pos = {x = 6, y = 1},
     loc_txt={
         name="Secondary Spade",
         text = {
@@ -343,9 +343,9 @@ SMODS.Enhancement{
         if card.base then
             card.children.center.atlas = G.ASSET_ATLAS['reverse_New_Enhance']
             if G.SETTINGS.CUSTOM_DECK.Collabs.Spades == "reverse_ourple" then
-                card.children.center:set_sprite_pos({x = 5, y = 7})
+                card.children.center:set_sprite_pos({x = 5, y = 2})
             else
-                card.children.center:set_sprite_pos({x = 6, y = 6})
+                card.children.center:set_sprite_pos({x = 6, y = 1})
             end
         end
     end,
@@ -353,9 +353,9 @@ SMODS.Enhancement{
         if card.base then
             card.children.center.atlas = G.ASSET_ATLAS['reverse_New_Enhance']
             if G.SETTINGS.CUSTOM_DECK.Collabs.Spades == "reverse_ourple" then
-                card.children.center:set_sprite_pos({x = 5, y = 7})
+                card.children.center:set_sprite_pos({x = 5, y = 2})
             else
-                card.children.center:set_sprite_pos({x = 6, y = 6})
+                card.children.center:set_sprite_pos({x = 6, y = 1})
             end
         end
     end
@@ -364,7 +364,7 @@ SMODS.Enhancement{
 SMODS.Enhancement{
     key = "iridium",
     atlas = "New_Enhance",
-    pos = {x = 1, y = 7},
+    pos = {x = 1, y = 2},
     loc_txt={
         name="Iridium Card",
         text = {

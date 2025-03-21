@@ -42,6 +42,13 @@ SMODS.Atlas{
     py = 34
 }
 
+SMODS.Atlas{
+    key = "Zodiac_Booster",
+    path = "reverse_boosters.png",
+    px = 71,
+    py = 95
+}
+
 SMODS.Sticker{
     key = "ephemeral",
     atlas = "New_Sticker",
