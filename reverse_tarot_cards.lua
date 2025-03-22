@@ -258,12 +258,12 @@ SMODS.Consumable{
         local highest_hand = 'High Card'
         for k, v in pairs(G.GAME.hands) do
             if type(G.GAME.hands[k].level) == "table" then --Talisman compatibility by revoo_.
-                if to_number(G.GAME.hands[k].level) >= highest_level then
+                if to_number(G.GAME.hands[k].level) >= highest_level and to_number(G.GAME.hands[k].level) > 1 then
                     highest_hand = k
                     highest_level = to_number(G.GAME.hands[k].level)
                 end
             else
-                if G.GAME.hands[k].level >= highest_level then
+                if G.GAME.hands[k].level >= highest_level and G.GAME.hands[k].level > 1 then
                     highest_hand = k
                     highest_level = G.GAME.hands[k].level
                 end
@@ -292,12 +292,12 @@ SMODS.Consumable{
         local highest_hand = 'High Card'
         for k, v in pairs(G.GAME.hands) do
             if type(G.GAME.hands[k].level) == "table" then
-                if to_number(G.GAME.hands[k].level) >= highest_level then
+                if to_number(G.GAME.hands[k].level) >= highest_level and to_number(G.GAME.hands[k].level) > 1 then
                     highest_hand = k
                     highest_level = to_number(G.GAME.hands[k].level)
                 end
             else
-                if G.GAME.hands[k].level >= highest_level then
+                if G.GAME.hands[k].level >= highest_level and G.GAME.hands[k].level > 1 then
                     highest_hand = k
                     highest_level = G.GAME.hands[k].level
                 end
