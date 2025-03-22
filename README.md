@@ -1,6 +1,6 @@
 <h1>Documentation:</h1><br/>
 
-<h3>Contributors:</h3>
+<h3>Other Contributors:</h3>
 
 <ul>
 <li>revoo_. - Talsiman Mod compatibility</li>
