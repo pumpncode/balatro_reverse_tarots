@@ -122,7 +122,7 @@ local align_hook = CardArea.align_cards
 
 function CardArea:align_cards()
     align_hook(self)
-    if self then
+    if self and G.P_CENTERS['c_fool'].atlas then
         if #self.cards > 0 then
             for k, card in ipairs(self.cards) do
                 if card.config.center.mod then
