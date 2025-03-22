@@ -47,11 +47,11 @@ Capricorn - Eris - Select up to three cards, converts the left two into the rank
 Ophiuchus - Janus - Gives up to two random Zodiac cards<br/>
 
 Appears in Astrology Packs<bt/>
+Magenta Seal: If held in hand at the end of round, grands Zodiac corresponding to the last hand played
 
 To follow:<br/>
 
 <ul>
-<li>Magenta Seal</li>
 <li>Constellation Skip Tag</li>
 <li>Zodiac Vouchers</li>
 </ul>

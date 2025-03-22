@@ -235,7 +235,7 @@ pattern = '''if self.ability.name == 'Odd Todd' and
                 (context.other_card:get_id() == 14))
                 then'''
 position = "at"
-payload = '''if self.ability.name == 'Odd Todd' and is_rank(context.other_card, {3, 5, 6, 9, 14}) then'''
+payload = '''if self.ability.name == 'Odd Todd' and is_rank(context.other_card, {3, 5, 7, 9, 14}) then'''
 match_indent = true
 times = 1
 

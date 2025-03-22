@@ -14,6 +14,10 @@ SMODS.Consumable{
             "{C:attention}Created card: #1#{}"
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_fool'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_fool'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         local fool_c = G.GAME.last_tarot_planet and G.P_CENTERS[G.GAME.last_tarot_planet] or nil
         local last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set} or localize('k_none')
@@ -153,6 +157,10 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_magician'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_magician'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_counterfeit
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}
@@ -235,6 +243,10 @@ SMODS.Consumable{
             number_planets = 1
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_high_priestess'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_high_priestess'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         local highest_level = 0
         local highest_hand = 'High Card'
@@ -308,6 +320,10 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_empress'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_empress'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_held_mult
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}
@@ -389,6 +405,10 @@ SMODS.Consumable{
             number_cards = 2
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_emperor'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_emperor'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         return {vars = {center.ability.context.number_cards}}
     end,
@@ -432,6 +452,10 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_heirophant'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_heirophant'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_held_bonus
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}
@@ -514,6 +538,10 @@ SMODS.Consumable{
             max_highlighted = 1
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_lovers'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_lovers'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_omnirank
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}
@@ -596,6 +624,10 @@ SMODS.Consumable{
             max_highlighted = 1
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_chariot'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_chariot'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_copper
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}
@@ -678,6 +710,10 @@ SMODS.Consumable{
             max_highlighted = 1
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_justice'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_justice'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_crystal
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}
@@ -758,6 +794,10 @@ SMODS.Consumable{
             dollars = 20
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_hermit'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_hermit'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         return {vars = {center.ability.context.dollars}}
     end,
@@ -788,6 +828,10 @@ SMODS.Consumable{
             edition_odds = 4
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_wheel_of_fortune'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_wheel_of_fortune'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.e_foil
         info_queue[#info_queue+1] = G.P_CENTERS.e_holo
@@ -851,6 +895,10 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_strength'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_strength'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         return {vars = {center.ability.context.max_highlighted}}
     end,
@@ -934,6 +982,10 @@ SMODS.Consumable{
             number_cards = 1
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_hanged_man'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_hanged_man'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         return {vars = {center.ability.context.number_cards}}
     end,
@@ -977,6 +1029,10 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_death'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_death'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         return {vars = {center.ability.context.max_highlighted}}
     end,
@@ -1048,6 +1104,10 @@ SMODS.Consumable{
             max_money = 50
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_temperance'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_temperance'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         local money = 0
         if G.hand then
@@ -1119,6 +1179,10 @@ SMODS.Consumable{
             max_highlighted = 1
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_devil'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_devil'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_pyrite
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}
@@ -1201,6 +1265,10 @@ SMODS.Consumable{
             max_highlighted = 1
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_tower'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_tower'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_marble
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}
@@ -1283,6 +1351,10 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_star'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_star'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_secondary_diamond
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}
@@ -1365,6 +1437,10 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_moon'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_moon'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_secondary_club
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}
@@ -1447,6 +1523,10 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_sun'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_sun'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_secondary_heart
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}
@@ -1523,6 +1603,10 @@ SMODS.Consumable{
             "{C:inactive}(Is always {}{C:attention}Ephemeral{}{C:inactive})",
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_judgement'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_judgement'].pos)
+    end,
     config = { context ={}},
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
@@ -1570,6 +1654,10 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    set_sprites = function(self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_world'].atlas]
+        card.children.center:set_sprite_pos(G.P_CENTERS['c_world'].pos)
+    end,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue+1] = G.P_CENTERS.m_reverse_secondary_spade
         return {vars = {center.ability.context.max_highlighted, center.ability.context.mod_conv}}

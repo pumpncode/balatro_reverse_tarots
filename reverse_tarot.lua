@@ -118,6 +118,36 @@ function round(val)
     return math.floor(val + 0.5)
 end
 
+local align_hook = CardArea.align_cards
+
+function CardArea:align_cards()
+    align_hook(self)
+    if self then
+        if #self.cards > 0 then
+            for k, card in ipairs(self.cards) do
+                if card.config.center.mod then
+                    if card.config.center.mod.id == "reverse_tarot" and card.config.center.set == "Tarot" then
+                        card.children.center.role.r_bond = 'Weak'
+                        card.children.center.role.role_type = 'Major'
+                        local t = card.T
+                        card.children.center.T = setmetatable({}, {
+                            __index = function(_, k)
+                                if k == "r" then
+                                    return math.pi
+                                end
+                                return t[k]
+                            end,
+                            __newindex = function(_, k, v)
+                                t[k] = v
+                            end
+                        })
+                    end
+                end
+            end
+        end
+    end
+end
+
 local hand_hook = evaluate_poker_hand
 
 function evaluate_poker_hand(hand)

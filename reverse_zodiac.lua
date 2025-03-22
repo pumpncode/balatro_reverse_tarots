@@ -59,6 +59,77 @@ SMODS.PokerHand {
     end
 }
 
+SMODS.Seal{
+    key = "magenta",
+    atlas = "New_Enhance",
+    pos = {x = 2, y = 2},
+    badge_colour = HEX("96108D"),
+    loc_txt = {
+        name = "Magenta Seal",
+        label = "Magenta Seal",
+        text={
+            "Creates the {C:zodiac}Zodiac{} card",
+            "for final played {C:attention}poker hand{}",
+            "of round if {C:attention}held in hand{}", -- change to if scored
+            "{C:inactive}(Must have room)",
+        },
+    },
+    loc_vars = function(self, info_queue, center)
+        if G.hand then
+            if #G.hand.highlighted >= 1 then
+                local text,disp_text = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
+                local _planet = {}
+                for k, v in pairs(G.P_CENTER_POOLS.Planet) do
+                    if v.config.hand_type == text then
+                        _planet = v.key
+                    end
+                end
+                for i, v in ipairs(G.GAME.fool_table) do
+                    if _planet == v then
+                        _planet = G.P_CENTERS[G.GAME.fool_table[i+13]]
+                    end
+                end
+                info_queue[#info_queue+1] = _planet
+                return {}
+            end
+        end
+    end,
+    calculate = function(self, card, context)
+        if context.end_of_round and context.playing_card_end_of_round then
+            if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                local ret = {}
+                local card_type = 'Planet'
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'before',
+                    delay = 0.0,
+                    func = (function()
+                        if G.GAME.last_hand_played then
+                            local _planet = 0
+                            for k, v in pairs(G.P_CENTER_POOLS.Planet) do
+                                if v.config.hand_type == G.GAME.last_hand_played then
+                                    _planet = v.key
+                                end
+                            end
+                            for i, v in ipairs(G.GAME.fool_table) do
+                                if _planet == v then
+                                    local card = create_card("Tarot_Planet",G.consumeables, nil, nil, nil, nil, G.GAME.fool_table[i+13], 'blusl')
+                                    card:add_to_deck()
+                                    G.consumeables:emplace(card)
+                                    G.GAME.consumeable_buffer = 0 break
+                                end
+                            end
+                        end
+                return true
+            end)}))
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = "Zodiac", colour = HEX("C61CBB")})
+                ret.effect = true
+                return ret
+            end
+        end
+    end
+}
+
 SMODS.Booster{
     key = "zodiac_1",
     atlas = "Zodiac_Booster",
