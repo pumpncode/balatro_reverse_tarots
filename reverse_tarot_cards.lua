@@ -257,11 +257,16 @@ SMODS.Consumable{
         local highest_level = 0
         local highest_hand = 'High Card'
         for k, v in pairs(G.GAME.hands) do
-            --print(type(G.GAME.hands[k].level))
-            --print(type(highest_level))
-            if G.GAME.hands[k].level >= highest_level then
-                highest_hand = k
-                highest_level = G.GAME.hands[k].level
+            if type(G.GAME.hands[k].level) == "table" then --Talisman compatibility by revoo_.
+                if to_number(G.GAME.hands[k].level) >= highest_level then
+                    highest_hand = k
+                    highest_level = to_number(G.GAME.hands[k].level)
+                end
+            else
+                if G.GAME.hands[k].level >= highest_level then
+                    highest_hand = k
+                    highest_level = G.GAME.hands[k].level
+                end
             end
         end
         local planet_name = nil
@@ -286,9 +291,16 @@ SMODS.Consumable{
         local highest_level = 0
         local highest_hand = 'High Card'
         for k, v in pairs(G.GAME.hands) do
-            if G.GAME.hands[k].level >= highest_level then
-                highest_hand = k
-                highest_level = G.GAME.hands[k].level
+            if type(G.GAME.hands[k].level) == "table" then
+                if to_number(G.GAME.hands[k].level) >= highest_level then
+                    highest_hand = k
+                    highest_level = to_number(G.GAME.hands[k].level)
+                end
+            else
+                if G.GAME.hands[k].level >= highest_level then
+                    highest_hand = k
+                    highest_level = G.GAME.hands[k].level
+                end
             end
         end
         local planet_name = nil

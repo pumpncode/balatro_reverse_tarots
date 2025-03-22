@@ -1,4 +1,11 @@
-Documentation of all added cards:<br/>
+<h1>Documentation:</h1><br/>
+
+<h3>Contributors:</h3>
+
+<ul>
+<li>revoo_. - Talsiman Mod compatibility</li>
+</ul>
+
 #-----------------------------------------------------------------------------------------<br/>
 Tarots<br/>
 Reverse Fool - Creates an inverted version of the last Tarot card used (regular becomes reverse, reverse becomes regular. Planets
@@ -104,3 +111,5 @@ The Void (Black Rune) - Removes enhancements from scored cards after scoring (mi
 Finisher Blinds (NOT FULLY IMPLEMENTED)<br/>
 The Beast - <br/>
 The Delirium - <br/>
+
+#----------------------------------------------------------------------------------------------<br/>
