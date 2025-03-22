@@ -55,9 +55,10 @@ pattern = '''elseif v.set == 'Planet' then
 position = "after"
 payload = '''
 elseif v.set == 'Tarot' and (_append == 'emp'or _append == 'remp' or _append == 'car' or _append == 'rcar' or _append == 'vag' or _append == 'rvag') then
-    if ((_append == 'emp' or _append == 'car' or _append == 'vag') and v.order <= 22 or (_append == 'remp' or _append == 'rcar' or _append == 'rvag') and v.order > 22) then
+    if ((_append == 'emp' or _append == 'car' or _append == 'vag') and v.order <= 22 or (_append == 'remp' or _append == 'rcar' or _append == 'rvag') and v.order > 22 and (v.original_mod and v.original_mod.id == "reverse_tarot")) then
 	    add = true
         --print(v.name .. " " .. _append .. " " .. v.order)
+        --print(tprint(v))
     end
 '''
 match_indent = true
