@@ -56,7 +56,7 @@ SMODS.Blind{
         name = "The Companion",
         text = {
             "Debuffs the effects",
-            "of every odd card",
+            "of every other card (1, 3, 5)",
             "{C:attention}in played hand"
         }
     },
