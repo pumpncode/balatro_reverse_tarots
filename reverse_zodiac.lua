@@ -438,7 +438,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                    final_cards[i]:set_ability(ability.key);
+                    final_cards[i]:set_ability(G.P_CENTERS[ability.key]);
                     final_cards[i]:juice_up(0.3, 0.3);
                     return true
                 end
@@ -570,7 +570,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_iridium");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_iridium"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
@@ -750,7 +750,7 @@ SMODS.Consumable{
                 if G.hand.highlighted[i] ~= rightmost then
                     print(rightmost.config.center.key)
                     if rightmost.config.center.key ~= "c_base" then
-                        G.hand.highlighted[i]:set_ability(rightmost.config.center.key)
+                        G.hand.highlighted[i]:set_ability(G.P_CENTERS[rightmost.config.center.key])
                     end
                     if rightmost.edition then
                         G.hand.highlighted[i]:set_edition(rightmost.edition)
@@ -1057,7 +1057,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                    final_cards[i]:set_ability(G.hand.highlighted[1].config.center.key);
+                    final_cards[i]:set_ability(G.P_CENTERS[G.hand.highlighted[1].config.center.key]);
                     final_cards[i]:juice_up(0.3, 0.3);
                     return true
                 end

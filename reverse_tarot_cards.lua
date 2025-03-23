@@ -198,7 +198,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_counterfeit");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_counterfeit"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
@@ -377,7 +377,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_held_mult");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_held_mult"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
@@ -513,7 +513,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_held_bonus");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_held_bonus"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
@@ -601,7 +601,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                    G.hand.highlighted[i]:set_ability("m_reverse_omnirank")
+                    G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_omnirank"])
                     G.hand.highlighted[i]:juice_up(0.3, 0.3);
                     return true
                 end
@@ -689,7 +689,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_copper");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_copper"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
@@ -777,7 +777,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_crystal");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_crystal"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
@@ -1260,7 +1260,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_pyrite");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_pyrite"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
@@ -1348,7 +1348,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_marble");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_marble"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
@@ -1436,7 +1436,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_secondary_diamond");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_secondary_diamond"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
@@ -1524,7 +1524,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_secondary_club");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_secondary_club"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
@@ -1612,7 +1612,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_secondary_heart");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_secondary_heart"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
@@ -1747,7 +1747,7 @@ SMODS.Consumable{
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                     G.hand.highlighted[i]:set_ability("m_reverse_secondary_spade");
+                     G.hand.highlighted[i]:set_ability(G.P_CENTERS["m_reverse_secondary_spade"]);
                      G.hand.highlighted[i]:juice_up(0.3, 0.3);
                      return true
                 end
