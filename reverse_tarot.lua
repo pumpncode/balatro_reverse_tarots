@@ -49,6 +49,13 @@ SMODS.Atlas{
     py = 95
 }
 
+SMODS.Atlas{
+    key = "Reverse_Vouchers",
+    path = "reverse_vouchers.png",
+    px = 71,
+    py = 95
+}
+
 SMODS.Sticker{
     key = "ephemeral",
     atlas = "New_Sticker",

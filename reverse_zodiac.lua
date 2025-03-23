@@ -130,6 +130,46 @@ SMODS.Seal{
     end
 }
 
+SMODS.Voucher {
+    key = "zodiac_merchant",
+    atlas = "Reverse_Vouchers",
+    pos = {x = 0, y = 0},
+    loc_txt = {
+        name = "Zodiac Merchant",
+        text={
+            "{C:zodiac}Zodiac{} cards can appear",
+            "in the shop",
+        },
+    },
+    redeem = function(self, card)
+        G.GAME['zodiac_rate'] = G.GAME['zodiac_rate'] + 2
+    end
+}
+
+SMODS.Voucher {
+    key = "zodiac_tycoon",
+    atlas = "Reverse_Vouchers",
+    pos = {x = 0, y = 1},
+    loc_txt = {
+        name = "Zodiac Tycoon",
+        text={
+            "{C:zodiac}Zodiac{} cards appear",
+            "{C:attention}#1#X{} more frequently",
+            "in the shop",
+        },
+    },
+    config = {
+        extra = 2
+    },
+    requires = {"v_reverse_zodiac_merchant"},
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.extra}}
+    end,
+    redeem = function(self, card)
+        G.GAME['zodiac_rate'] = G.GAME['zodiac_rate'] + 2
+    end
+}
+
 SMODS.Booster{
     key = "zodiac_1",
     atlas = "Zodiac_Booster",

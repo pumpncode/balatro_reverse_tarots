@@ -59,9 +59,12 @@ Magenta Seal: If held in hand at the end of round, grands Zodiac corresponding t
 To follow:<br/>
 
 <ul>
-<li>Constellation Skip Tag</li>
-<li>Zodiac Vouchers</li>
+<li>Polaris (Zodiac) Skip Tag</li>
 </ul>
+#----------------------------------------------------------------------------------------------<br/>
+Vouchers<br/>
+Zodiac Merchant - Zodiac cards can appear in the shop<br/>
+Zodiac Tycoon - Zodiac cards appear 2x more frequently in the shop<br/>
 #----------------------------------------------------------------------------------------------<br/>
 Spectrals<br/>
 Horoscope - Applies a Magenta Seal to the selected card<br/>
