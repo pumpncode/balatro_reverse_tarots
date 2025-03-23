@@ -64,7 +64,7 @@ To follow:<br/>
 </ul>
 #----------------------------------------------------------------------------------------------<br/>
 Spectrals<br/>
- - Applies a Magenta Seal to the selected card<br/>
+Horoscope - Applies a Magenta Seal to the selected card<br/>
 #----------------------------------------------------------------------------------------------<br/>
 Jokers<br/>
 Rekoj - Gives -4 Mult<br/>

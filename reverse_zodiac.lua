@@ -247,6 +247,52 @@ SMODS.Booster{
 }
 
 SMODS.Consumable{
+    key = "horoscope",
+    set = "Spectral",
+    atlas = "Reverse_Tarots",
+    pos = {x = 10, y = 2},
+    soul_pos = {x = 11, y = 2},
+    loc_txt = {
+        name = "Horoscope",
+        text = {
+            "Add a {C:zodiac}Magenta Seal{}",
+            "to {C:attention}1{} selected",
+            "card in your hand",
+        }
+    },
+    config = { context =
+        {
+            number_cards = 1
+        }
+    },
+    loc_vars = function(self, info_queue, center)
+        --print(center.ability.name)
+        info_queue[#info_queue+1] = G.P_SEALS.reverse_magenta
+    end,
+    can_use = function(self, card)
+        if G and G.hand then
+            if #G.hand.highlighted ~= 0 and #G.hand.highlighted <= 1 then
+                return true
+            end
+        end
+    end,
+    use = function(self, card, area, copier)
+        local conv_card = G.hand.highlighted[1]
+        G.E_MANAGER:add_event(Event({func = function()
+            play_sound('tarot1')
+            card:juice_up(0.3, 0.5)
+            return true end }))
+        local seal = pseudorandom_element(G.P_SEALS, pseudoseed('reverse_virgo_seal'))
+        G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function()
+            conv_card:set_seal("reverse_magenta", nil, true)
+            return true end }))
+        
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2,func = function() G.hand:unhighlight_all(); return true end }))
+    end
+}
+
+SMODS.Consumable{
     key = "janus",
     set = "Planet",
     atlas = "Reverse_Tarots",
@@ -805,8 +851,9 @@ SMODS.Consumable{
     loc_txt = {
         name = "Virgo",
         text = {
-            "Applies a random seal",
-            "to the selected card"
+            "Add a {C:attention}Random Seal{}",
+            "to {C:attention}1{} selected",
+            "card in your hand",
         }
     },
     config = { context =
