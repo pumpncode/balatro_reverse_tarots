@@ -4,6 +4,34 @@ SMODS.UndiscoveredSprite {
     pos = {x = 0, y = 0} 
 }
 
+SMODS.Tag{
+    key = "polaris",
+    atlas = "Reverse_Tags",
+    pos = {x = 0, y = 0},
+    loc_txt = {
+        name = "Polaris Tag",
+        text={
+            "Gives a free",
+            "{C:zodiac}Mega Astrology Pack",
+        }
+    },
+    apply = function(self, tag, context)
+        tag:yep('+', G.C.PURPLE,function() 
+            local key = 'p_reverse_zodiac_4'
+            local card = Card(G.play.T.x + G.play.T.w/2 - G.CARD_W*1.27/2,
+            G.play.T.y + G.play.T.h/2-G.CARD_H*1.27/2, G.CARD_W*1.27, G.CARD_H*1.27, G.P_CARDS.empty, G.P_CENTERS[key], {bypass_discovery_center = true, bypass_discovery_ui = true})
+            card.cost = 0
+            card.from_tag = true
+            G.FUNCS.use_card({config = {ref_table = card}})
+            card:start_materialize()
+            --G.CONTROLLER.locks[lock] = nil
+            return true
+        end)
+        tag.triggered = true
+        return true
+    end
+}
+
 SMODS.ConsumableType {
     key = "Zodiac",
     primary_colour = HEX("C61CBB"),
@@ -788,7 +816,7 @@ SMODS.Consumable{
         for i=1, #G.hand.highlighted do
             G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function()
                 if G.hand.highlighted[i] ~= rightmost then
-                    print(rightmost.config.center.key)
+                    --print(rightmost.config.center.key)
                     if rightmost.config.center.key ~= "c_base" then
                         G.hand.highlighted[i]:set_ability(G.P_CENTERS[rightmost.config.center.key])
                     end

@@ -56,6 +56,13 @@ SMODS.Atlas{
     py = 95
 }
 
+SMODS.Atlas{
+    key = "Reverse_Tags",
+    path = "reverse_tags.png",
+    px = 34,
+    py = 34
+}
+
 SMODS.Sticker{
     key = "ephemeral",
     atlas = "New_Sticker",
