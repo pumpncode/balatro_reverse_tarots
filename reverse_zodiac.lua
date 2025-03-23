@@ -328,10 +328,10 @@ SMODS.Consumable{
     loc_txt = {
         name = "Pisces",
         text = {
-            "Select {C:attention} 1 {} card,",
+            "Select {C:attention}#1#{} card,",
             "applies random {C:attention}Enhancement{} to it",
-            "and one other card of the same",
-            "{C:attention}rank{} in your {C:attention}Hand{} or {C:attention}Deck{}"
+            "and {C:attention}#1#{} other card of the same",
+            "{C:attention}rank{} in your {C:attention}full decck{}"
         }
     },
     config = { context =
@@ -341,6 +341,7 @@ SMODS.Consumable{
     },
     loc_vars = function(self, info_queue, center)
         --print(center.ability.name)
+        return {vars = {center.ability.context.number_cards}}
     end,
     can_use = function(self, card)
         if G and G.hand then
@@ -430,7 +431,7 @@ SMODS.Consumable{
     loc_txt = {
         name = "Aries",
         text = {
-            "Adds one copy of",
+            "Adds {C:attention}#1#{} copy of",
             "selected card to hand"
         }
     },
@@ -441,6 +442,7 @@ SMODS.Consumable{
     },
     loc_vars = function(self, info_queue, center)
         --print(center.ability.name)
+        return {vars = {center.ability.context.number_cards}}
     end,
     can_use = function(self, card)
         if G and G.hand then
@@ -561,7 +563,7 @@ SMODS.Consumable{
     loc_txt = {
         name = "Gemini",
         text = {
-            "Select one card.  All cards",
+            "Select {C:attention}#1#{} card, all cards",
             "of this {C:attention}rank{} in your deck",
             "become that {C:attention}suit{}"
         }
@@ -573,6 +575,7 @@ SMODS.Consumable{
     },
     loc_vars = function(self, info_queue, center)
         --print(center.ability.name)
+        return {vars = {center.ability.context.number_cards}}
     end,
     can_use = function(self, card)
         if G and G.hand then
@@ -746,7 +749,7 @@ SMODS.Consumable{
     loc_txt = {
         name = "Leo",
         text = {
-            "Destroys {C:attention}3{} random",
+            "Destroys {C:attention}#1#{} random",
             "cards in hand"
         }
     },
@@ -757,6 +760,7 @@ SMODS.Consumable{
     },
     loc_vars = function(self, info_queue, center)
         --print(center.ability.name)
+        return {vars = {center.ability.context.destroy}}
     end,
     can_use = function(self, card)
         if G and G.hand then
@@ -946,7 +950,7 @@ SMODS.Consumable{
     loc_txt = {
         name = "Scorpio",
         text = {
-            "Select {C:attention} #1# Enhanced{} card,",
+            "Select {C:attention}#1# Enhanced{} card,",
             "its enhancement is applied to {C:attention}#2#",
             "unehanced cards in hand"
         }
@@ -1047,7 +1051,7 @@ SMODS.Consumable{
         text = {
             "Select {C:attention}#1#{} card, destroy",
             "it and {C:attention}#2#{} others from your",
-            "{C:attention}Hand or Deck{} of the same {C:attention}base suit{}"
+            "{C:attention}full deck{} of the same {C:attention}base suit{}"
         }
     },
     config = { context =
@@ -1119,8 +1123,8 @@ SMODS.Consumable{
         name = "Capricorn",
         text = {
             "Select up to {C:attention}#1#{} cards",
-            "converts the left two",
-            "into the {C:attention}rank{} of the right"
+            "converts the {C:attention}left two{}",
+            "into the {C:attention}rank{} of the {C:attention}right{}"
         }
     },
     config = { context =
