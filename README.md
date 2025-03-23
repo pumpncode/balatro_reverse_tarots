@@ -55,12 +55,9 @@ Ophiuchus - Janus - Gives up to two random Zodiac cards<br/>
 
 Appears in Astrology Packs<bt/>
 Magenta Seal: If held in hand at the end of round, grands Zodiac corresponding to the last hand played
-
-To follow:<br/>
-
-<ul>
-<li>Polaris (Zodiac) Skip Tag</li>
-</ul>
+#----------------------------------------------------------------------------------------------<br/>
+Spectrals<br/>
+Polaris Tag - Immediately open a Mega Astrology Pack<br/>
 #----------------------------------------------------------------------------------------------<br/>
 Vouchers<br/>
 Zodiac Merchant - Zodiac cards can appear in the shop<br/>
