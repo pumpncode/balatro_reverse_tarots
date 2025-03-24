@@ -1,5 +1,5 @@
 SMODS.UndiscoveredSprite {
-    key = "Zodiac",
+    key = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 0, y = 0} 
 }
@@ -12,7 +12,7 @@ SMODS.Tag{
         name = "Polaris Tag",
         text={
             "Gives a free",
-            "{C:zodiac}Mega Astrology Pack",
+            "{C:reverse_zodiac}Mega Astrology Pack",
         }
     },
     apply = function(self, tag, context)
@@ -33,7 +33,7 @@ SMODS.Tag{
 }
 
 SMODS.ConsumableType {
-    key = "Zodiac",
+    key = "reverse_zodiac",
     primary_colour = HEX("C61CBB"),
     secondary_colour = HEX("96108D"),
     loc_txt = {
@@ -96,7 +96,7 @@ SMODS.Seal{
         name = "Magenta Seal",
         label = "Magenta Seal",
         text={
-            "Creates the {C:zodiac}Zodiac{} card",
+            "Creates the {C:reverse_zodiac}Zodiac{} card",
             "for final played {C:attention}poker hand{}",
             "of round if {C:attention}held in hand{}", -- change to if scored
             "{C:inactive}(Must have room)",
@@ -165,12 +165,12 @@ SMODS.Voucher {
     loc_txt = {
         name = "Zodiac Merchant",
         text={
-            "{C:zodiac}Zodiac{} cards can appear",
+            "{C:reverse_zodiac}Zodiac{} cards can appear",
             "in the shop",
         },
     },
     redeem = function(self, card)
-        G.GAME['zodiac_rate'] = G.GAME['zodiac_rate'] + 2
+        G.GAME['reverse_zodiac_rate'] = G.GAME['reverse_zodiac_rate'] + 2
     end
 }
 
@@ -181,7 +181,7 @@ SMODS.Voucher {
     loc_txt = {
         name = "Zodiac Tycoon",
         text={
-            "{C:zodiac}Zodiac{} cards appear",
+            "{C:reverse_zodiac}Zodiac{} cards appear",
             "{C:attention}#1#X{} more frequently",
             "in the shop",
         },
@@ -194,7 +194,7 @@ SMODS.Voucher {
         return {vars = {center.ability.extra}}
     end,
     redeem = function(self, card)
-        G.GAME['zodiac_rate'] = G.GAME['zodiac_rate'] + 2
+        G.GAME['reverse_zodiac_rate'] = G.GAME['reverse_zodiac_rate'] + 2
     end
 }
 
@@ -207,7 +207,7 @@ SMODS.Booster{
         group_name = "Zodiac Pack",
         text = {
             "Choose {C:attention}#1#{} of up to",
-            "{C:attention}#2#{C:zodiac} Zodiac{} cards to",
+            "{C:attention}#2#{C:reverse_zodiac} Zodiac{} cards to",
             "be used immediately",
         }
     },
@@ -219,7 +219,7 @@ SMODS.Booster{
         return {vars = {center.ability.choose, center.ability.extra}}
     end,
     create_card = function (self, card, i) 
-        return create_card("Zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
+        return create_card("reverse_zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
     end,
     ease_background_colour = function(self)
         ease_colour(HEX("380335"), HEX("96108D"))
@@ -236,7 +236,7 @@ SMODS.Booster{
         group_name = "Zodiac Pack",
         text = {
             "Choose {C:attention}#1#{} of up to",
-            "{C:attention}#2#{C:zodiac} Zodiac{} cards to",
+            "{C:attention}#2#{C:reverse_zodiac} Zodiac{} cards to",
             "be used immediately",
         }
     },
@@ -248,7 +248,7 @@ SMODS.Booster{
         return {vars = {center.ability.choose, center.ability.extra}}
     end,
     create_card = function (self, card, i) 
-        return create_card("Zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
+        return create_card("reverse_zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
     end,
     ease_background_colour = function(self)
         ease_colour(HEX("380335"), HEX("96108D"))
@@ -265,7 +265,7 @@ SMODS.Booster{
         group_name = "Zodiac Pack",
         text = {
             "Choose {C:attention}#1#{} of up to",
-            "{C:attention}#2#{C:zodiac} Zodiac{} cards to",
+            "{C:attention}#2#{C:reverse_zodiac} Zodiac{} cards to",
             "be used immediately",
         }
     },
@@ -277,7 +277,7 @@ SMODS.Booster{
         return {vars = {center.ability.choose, center.ability.extra}}
     end,
     create_card = function (self, card, i) 
-        return create_card("Zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
+        return create_card("reverse_zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
     end,
     ease_background_colour = function(self)
         ease_colour(HEX("380335"), HEX("96108D"))
@@ -294,7 +294,7 @@ SMODS.Booster{
         group_name = "Zodiac Pack",
         text = {
             "Choose {C:attention}#1#{} of up to",
-            "{C:attention}#2#{C:zodiac} Zodiac{} cards to",
+            "{C:attention}#2#{C:reverse_zodiac} Zodiac{} cards to",
             "be used immediately",
         }
     },
@@ -306,7 +306,7 @@ SMODS.Booster{
         return {vars = {center.ability.choose, center.ability.extra}}
     end,
     create_card = function (self, card, i) 
-        return create_card("Zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
+        return create_card("reverse_zodiac", G.pack_cards, nil, nil, true, true, nil, "pack")
     end,
     ease_background_colour = function(self)
         ease_colour(HEX("380335"), HEX("96108D"))
@@ -323,7 +323,7 @@ SMODS.Consumable{
     loc_txt = {
         name = "Horoscope",
         text = {
-            "Add a {C:zodiac}Magenta Seal{}",
+            "Add a {C:reverse_zodiac}Magenta Seal{}",
             "to {C:attention}1{} selected",
             "card in your hand",
         }
@@ -393,7 +393,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "aquarius",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 0, y = 3},
     soul_pos = {x = 0, y = 4},
@@ -435,7 +435,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "pisces",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 1, y = 3},
     soul_pos = {x = 1, y = 4},
@@ -538,7 +538,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "aries",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 2, y = 3},
     soul_pos = {x = 2, y = 4},
@@ -587,7 +587,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "taurus",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 3, y = 3},
     soul_pos = {x = 3, y = 4},
@@ -670,7 +670,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "gemini",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 4, y = 3},
     soul_pos = {x = 4, y = 4},
@@ -775,7 +775,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "cancer",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 5, y = 3},
     soul_pos = {x = 5, y = 4},
@@ -856,7 +856,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "leo",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 6, y = 3},
     soul_pos = {x = 6, y = 4},
@@ -912,7 +912,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "virgo",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 7, y = 3},
     soul_pos = {x = 7, y = 4},
@@ -957,7 +957,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "libra",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 8, y = 3},
     soul_pos = {x = 8, y = 4},
@@ -1058,7 +1058,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "scorpio",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 9, y = 3},
     soul_pos = {x = 9, y = 4},
@@ -1157,7 +1157,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "sagittarius",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 10, y = 3},
     soul_pos = {x = 10, y = 4},
@@ -1230,7 +1230,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "capricorn",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 11, y = 3},
     soul_pos = {x = 11, y = 4},
@@ -1319,7 +1319,7 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "ophiuchus",
-    set = "Zodiac",
+    set = "reverse_zodiac",
     atlas = "Reverse_Tarots",
     pos = {x = 12, y = 3},
     soul_pos = {x = 12, y = 4},
@@ -1327,7 +1327,7 @@ SMODS.Consumable{
         name = "Ophiuchus",
         text = {
             "Creates up to {C:attention}#1#",
-            "random {C:zodiac}Zodiac{} cards",
+            "random {C:reverse_zodiac}Zodiac{} cards",
             "{C:inactive}(Must have room){}",
         }
     },
@@ -1349,7 +1349,7 @@ SMODS.Consumable{
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 if G.consumeables.config.card_limit > #G.consumeables.cards then
                     play_sound('timpani')
-                    local card = create_card('Zodiac', G.consumeables, nil, nil, nil, nil, nil, 'oph')
+                    local card = create_card('reverse_zodiac', G.consumeables, nil, nil, nil, nil, nil, 'oph')
                     card:add_to_deck()
                     G.consumeables:emplace(card)
                 end

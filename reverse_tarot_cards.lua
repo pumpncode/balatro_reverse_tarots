@@ -8,7 +8,7 @@ SMODS.Consumable{
         text = {
             "Creates {C:attention}inverted{} version of last",
             "{C:tarot}Tarot{}, card used this run.",
-            "{C:planet}Planets{} become {C:zodiac}Zodiacs{} and vice versa",
+            "{C:planet}Planets{} become {C:reverse_zodiac}Zodiacs{} and vice versa",
             "converts in collection order",
             "{s:0.8,C:tarot}The Fool(?){s:0.8} excluded",
             "{C:attention}Created card: #1#{}"
@@ -54,7 +54,7 @@ SMODS.Consumable{
                 for i, v in ipairs(G.GAME.fool_table) do
                     if fool_c.key == v then new_card = G.P_CENTERS[G.GAME.fool_table[i+13]] break end
                 end
-            elseif fool_c.set == "Zodiac" then
+            elseif fool_c.set == "reverse_zodiac" then
                 for i, v in ipairs(G.GAME.fool_table) do
                     if fool_c.key == v then new_card = G.P_CENTERS[G.GAME.fool_table[i-13]] break end
                 end
@@ -111,7 +111,7 @@ SMODS.Consumable{
                             return true
                         end
                     end
-                elseif fool_c.set == "Zodiac" then
+                elseif fool_c.set == "reverse_zodiac" then
                     for i, v in ipairs(G.GAME.fool_table) do
                         if fool_c.key == v then
                             local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, G.GAME.fool_table[i-13], 'fool')

@@ -2,13 +2,13 @@
 version = "1.0.0"
 priority = 0
 
-# adds Zodiac to most recently used tarot/Planet
+# adds reverse_zodiac to most recently used tarot/Planet
 [[patches]]
 [patches.pattern]
 target = "functions/misc_functions.lua"
 pattern = '''if card.config.center.set == 'Tarot' or card.config.center.set == 'Planet' then'''
 position = "at"
-payload = '''if card.config.center.set == 'Tarot' or card.config.center.set == 'Planet' or card.config.center.set == 'Zodiac' then'''
+payload = '''if card.config.center.set == 'Tarot' or card.config.center.set == 'Planet' or card.config.center.set == 'reverse_zodiac' then'''
 match_indent = true
 times = 1
 
@@ -542,6 +542,24 @@ payload = '''
 if G.GAME.blind.name == 'bl_reverse_final_beast' then
     G.GAME.blank_obj = Blind(G.GAME.blind.T.x, G.GAME.blind.T.y, G.GAME.blind.T.w, G.GAME.blind.T.h)
     G.GAME.blank_obj:set_blind(G.P_BLINDS[G.GAME.beast_wave])
+    if G.GAME.beast_wave == 'bl_reverse_final_war' then
+        for k, v in pairs(G.jokers.cards) do
+            if v.debuff then
+                v:set_debuff(false)
+            end
+        end
+        if #G.jokers.cards <= 2 then
+            for k, v in pairs(G.jokers.cards) do
+                v:set_debuff(true)
+            end
+        else
+            temp_hand = {}
+            for k, v in ipairs(G.jokers.cards) do temp_hand[#temp_hand+1] = v end
+            pseudoshuffle(temp_hand, pseudoseed('crimson_heart'))
+            temp_hand[1]:set_debuff(true)
+            temp_hand[2]:set_debuff(true)
+        end
+    end
 end
 '''
 
@@ -667,6 +685,7 @@ if G.GAME.blind.name == 'bl_reverse_final_beast' and G.GAME.chips - G.GAME.blind
         end
         G.GAME.beast_prepped = nil
     end
+    G.STATE = G.STATES.DRAW_TO_HAND
     G.STATE_COMPLETE = false
     return true
 end
