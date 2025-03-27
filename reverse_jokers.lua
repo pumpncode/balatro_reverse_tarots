@@ -3,7 +3,7 @@ SMODS.Joker{
     loc_txt = {
         name = 'Rekoj',
         text = {
-            '{X:mult,C:white}#1#{} Mult'
+            '{C:mult}#1#{} Mult'
         }
     },
     rarity = 1,
@@ -311,6 +311,11 @@ SMODS.Joker{
     rarity = 2,
     cost = 6,
     blueprint_compat = true,
+    set_sprites = function(self, card, front)
+        if G.SETTINGS.CUSTOM_DECK.Collabs.Spades == "reverse_ourple" then
+            card.children.center:set_sprite_pos({x = 0, y = 5})
+        end
+    end,
     loc_vars = function(self, info_queue, center)
         return {vars = {center.ability.extra.gain,  1 + center.ability.extra.gain*center.ability.extra.suit_tally}}
     end,
@@ -938,6 +943,545 @@ SMODS.Joker{
 }
 
 SMODS.Joker{
+    key = 'cathode_ray_tube',
+    loc_txt = {
+        name = 'Cathode Ray Tubes',
+        text = {
+            "{C:chips}+#1#{} Chips per",
+            "level of {C:green}CRT{} in {C:attention}Settings{}",
+            "decreases {C:green}CRT{} by {C:attention}#3#{} per hand played",
+            "currently {C:chips}+#2#{} Chips",
+            "{C:green}#4# in #5#{} chance to break",
+            "if {C:green}CRT{} is {C:attention}0{}"
+        }
+    },
+    rarity = 1,
+    cost = 5,
+    atlas = "Reverse_Jokers",
+    pos = {x = 1, y = 4},
+    config = {extra = {chips = 1, decrease = 10, prob = 3}},
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.extra.chips, round(G.SETTINGS.GRAPHICS.crt)*center.ability.extra.chips, center.ability.extra.decrease, G.GAME.probabilities.normal, center.ability.extra.prob}}
+    end,
+    in_pool = function(self, args)
+        if G.GAME.pool_flags.crt_extinct then
+            return false
+        else
+            return true
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        G.GAME.pool_flags.crt_extinct = false
+    end,
+    calculate = function(self,card,context)
+        if context.joker_main then
+            local chip_val = round(G.SETTINGS.GRAPHICS.crt)
+            G.SETTINGS.GRAPHICS.crt = round(math.max(G.SETTINGS.GRAPHICS.crt - card.ability.extra.decrease, 0))
+            if chip_val <= 0 and pseudorandom('crt') < G.GAME.probabilities.normal/card.ability.extra.prob then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        play_sound('tarot1')
+                        card.T.r = -0.2
+                        card:juice_up(0.3, 0.4)
+                        card.states.drag.is = true
+                        card.children.center.pinch.x = true
+                        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+                            func = function()
+                                    G.jokers:remove_card(card)
+                                    card:remove()
+                                    card = nil
+                                return true; end})) 
+                        return true
+                    end
+                })) 
+                G.GAME.pool_flags.crt_extinct = true
+                return {
+                    message = "Broken!",
+                    colour = G.C.GREEN
+                }
+            end
+            return {
+                chips = chip_val*card.ability.extra.chips
+            }
+        end
+    end
+}
+
+SMODS.Joker{
+    key = 'liquid_crystal_display',
+    loc_txt = {
+        name = 'Liquid Crystal Display',
+        text = {
+            "This Joker gains {X:chips,C:white}X#1#{} Chips per",
+            "level of {C:green}CRT{} {C:attention}below max{} in {C:attention}Settings{}",
+            "increases {C:green}CRT{} by {C:attention}#3#{} per hand played",
+            "currently {X:chips,C:white}X#2#{} Chips",
+            "{C:attention}will break{} at max {C:green}CRT{}"
+        }
+    },
+    rarity = 1,
+    cost = 4,
+    atlas = "Reverse_Jokers",
+    pos = {x = 0, y = 6},
+    config = {extra = {chips = .02, increase = 10}},
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.extra.chips, round(100-G.SETTINGS.GRAPHICS.crt)*center.ability.extra.chips + 1, center.ability.extra.increase}}
+    end,
+    in_pool = function(self, args)
+        return G.GAME.pool_flags.crt_extinct
+    end,
+    calculate = function(self,card,context)
+        if context.joker_main then
+            local chip_val = round(100-G.SETTINGS.GRAPHICS.crt)
+            G.SETTINGS.GRAPHICS.crt = round(math.min(G.SETTINGS.GRAPHICS.crt + card.ability.extra.increase, 100))
+            if G.SETTINGS.GRAPHICS.crt >= 100 then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        play_sound('tarot1')
+                        card.T.r = -0.2
+                        card:juice_up(0.3, 0.4)
+                        card.states.drag.is = true
+                        card.children.center.pinch.x = true
+                        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+                            func = function()
+                                    G.jokers:remove_card(card)
+                                    card:remove()
+                                    card = nil
+                                return true; end})) 
+                        return true
+                    end
+                })) 
+                return {
+                    message = "Broken!",
+                    colour = G.C.GREEN
+                }
+            end
+            return {
+                x_chips = chip_val*card.ability.extra.chips + 1
+            }
+        end
+    end
+}
+
+SMODS.Joker{
+    key = 'mirthful',
+    loc_txt = {
+        name = 'Mirthful Joker',
+        text = {
+            "{C:red}+#1#{} Mult if played",
+            "hand contains",
+            "a {C:attention}#2#",
+        }
+    },
+    rarity = 1,
+    cost = 1,
+    atlas = "Reverse_Jokers",
+    pos = {x = 4, y = 2},
+    config = {t_mult = 10, type = 'reverse_parity'},
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.t_mult, "Parity"}}
+    end,
+}
+
+SMODS.Joker{
+    key = 'cunning',
+    loc_txt = {
+        name = 'Cunning Joker',
+        text = {
+            "{C:blue}+#1#{} Chips if played",
+            "hand contains",
+            "a {C:attention}#2#",
+        }
+    },
+    rarity = 1,
+    cost = 1,
+    atlas = "Reverse_Jokers",
+    pos = {x = 4, y = 3},
+    config = {t_chips = 80, type = 'reverse_parity'},
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.t_chips, "Parity"}}
+    end,
+}
+
+SMODS.Joker{
+    key = 'nebula',
+    loc_txt = {
+        name = 'Nebula',
+        text = {
+            "Adds the number of times",
+            "{C:attention}other poker hands{} have been",
+            "played this run to Mult",
+        }
+    },
+    rarity = 1,
+    cost = 5,
+    atlas = "Reverse_Jokers",
+    pos = {x = 4, y = 5},
+    config = {extra = {mult = 1}},
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+        --return {vars = {center.ability.extra.mult}}
+        return {vars = {}}
+    end,
+    calculate = function(self,card,context)
+        if context.joker_main then
+            local sum = 0
+            for k, v in pairs(G.GAME.hands) do
+                if G.GAME.hands[context.scoring_name] ~= v then
+                    if type(G.GAME.hands[k].played) == "table" then
+                        sum = sum + to_number(G.GAME.hands[k].played)
+                    else
+                        sum = sum + G.GAME.hands[k].played
+                    end
+                end
+            end
+            return {
+                mult = sum
+            }
+        end
+    end
+}
+
+SMODS.Joker{
+    key = 'divination',
+    loc_txt = {
+        name = 'Divination',
+        text = {
+            '{C:reverse_zodiac}Zodiac Packs{} in the',
+            "shop are now free"
+        }
+    },
+    rarity = 2,
+    cost = 6,
+    atlas = "Reverse_Jokers",
+    pos = {x = 1, y = 5},
+    config = {},
+    blueprint_compat = false,
+    loc_vars = function(self, info_queue, center)
+        --done in patches
+    end,
+    calculate = function(self,card,context)
+    end
+}
+
+SMODS.Joker{
+    key = 'astromancer',
+    loc_txt = {
+        name = 'Astromancer',
+        text = {
+            "Create a {C:reverse_zodiac}Zodiac{} card",
+            "when {C:attention}Boss Blind{} is selected",
+            "{C:inactive}(Must have room)",
+        }
+    },
+    rarity = 2,
+    cost = 6,
+    atlas = "Reverse_Jokers",
+    pos = {x = 2, y = 5},
+    soul_pos = {x = 2, y = 4},
+    config = {},
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+    end,
+    calculate = function(self,card,context)
+        if context.setting_blind and not (context.blueprint_card or card).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            if G.GAME.blind.boss then
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    func = (function()
+                        G.E_MANAGER:add_event(Event({
+                            func = function() 
+                                local card = create_card('reverse_zodiac',G.consumeables, nil, nil, nil, nil, nil, 'ast')
+                                card:add_to_deck()
+                                G.consumeables:emplace(card)
+                                G.GAME.consumeable_buffer = 0
+                                return true
+                            end}))                        
+                        return true
+                    end)}))
+                    return {card = card, message = "Zodiac", colour = HEX("C61CBB")}
+            end
+        end
+    end
+}
+
+SMODS.Joker{
+    key = 'oracle',
+    loc_txt = {
+        name = 'Oracle',
+        text={
+            "This Joker gains",
+            "{X:chips,C:white} X#1# {} Chips every time",
+            "a {C:reverse_zodiac}Zodiac{} card is used",
+            "{C:inactive}(Currently {X:chips,C:white} X#2# {C:inactive} Chips)",
+        },
+    },
+    rarity = 2,
+    cost = 6,
+    atlas = "Reverse_Jokers",
+    pos = {x = 3, y = 5},
+    config = {extra = {scaling = .25, tally = 0}},
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.extra.scaling, 1 + center.ability.extra.scaling*center.ability.extra.tally}}
+    end,
+    calculate = function(self,card,context)
+        if context.using_consumeable then
+            if context.consumeable.ability.set == 'reverse_zodiac' and not context.blueprint then
+                card.ability.extra.tally = card.ability.extra.tally + 1
+                return {
+                    card = card,
+                    message =  "X" .. card.ability.extra.scaling,
+                    colour = G.C.BLUE
+                }
+            end
+        end
+        if context.joker_main then
+            return {
+                x_chips = 1 + card.ability.extra.scaling*card.ability.extra.tally
+            }
+        end
+    end
+}
+
+SMODS.Joker{
+    key = 'monkeys_paw',
+    loc_txt = {
+        name = "Monkey's Paw",
+        text = {
+            "{C:red}+#1#{} Hand if about to lose,",
+            "{C:attention}-#1#{} Hand Size every time",
+            "this Joker activates",
+            "{C:inactive}({C:attention}#2#{C:inactive} activations left)"
+        }
+    },
+    rarity = 3,
+    cost = 8,
+    atlas = "Reverse_Jokers",
+    pos = {x = 5, y = 0},
+    config = {extra = {remaining = 3, hands = 1}},
+    blueprint_compat = false,
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.extra.hands, center.ability.extra.remaining}}
+    end,
+    set_sprites = function(self, card, front)
+        if card.ability then
+            card.children.center:set_sprite_pos({x = 5, y = 3 - card.ability.extra.remaining})
+        end
+    end,
+    calculate = function(self,card,context)
+        if context.final_scoring_step and G.GAME.current_round.hands_left <= 0 and not context.blueprint then
+            card.ability.extra.remaining = card.ability.extra.remaining - 1
+            local full_score = G.GAME.chips + hand_chips * mult
+            if full_score < G.GAME.blind.chips then
+                G.E_MANAGER:add_event(Event({ -- flip card
+                    trigger = 'after',
+                    delay = 0.15,
+                    func = function()
+                        card:flip();  
+                        play_sound('card1', percent);
+                        card:juice_up(0.3, 0.3);
+                        return true
+                    end
+                }))
+                delay(.5)
+                G.E_MANAGER:add_event(Event({ --update sprite
+                    trigger = 'after',
+                    delay = 0.15,
+                    func = function()
+                        card.children.center:set_sprite_pos({x = 5, y = 3 - card.ability.extra.remaining})
+                        return true
+                    end
+                }))
+                G.E_MANAGER:add_event(Event({ -- flip card
+                    trigger = 'after',
+                    delay = 0.15,
+                    func = function()
+                        card:flip();  
+                        play_sound('card1', percent);
+                        card:juice_up(0.3, 0.3);
+                        return true
+                    end
+                }))
+                ease_hands_played(card.ability.extra.hands)
+                G.hand:change_size(-1)
+                if card.ability.extra.remaining <= 0 then
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            play_sound('tarot1')
+                            card.T.r = -0.2
+                            card:juice_up(0.3, 0.4)
+                            card.states.drag.is = true
+                            card.children.center.pinch.x = true
+                            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+                                func = function()
+                                        G.jokers:remove_card(card)
+                                        card:remove()
+                                        card = nil
+                                    return true; end})) 
+                            return true
+                        end
+                    })) 
+                    G.GAME.pool_flags.crt_extinct = true
+                    return {
+                        message = "Granted...",
+                        colour = G.C.Yellow
+                    }
+                end
+                return {
+                    message = "Granted...",
+                    colour = G.C.Yellow,
+                    card = card
+                }
+            end
+        end
+    end 
+}
+
+SMODS.Joker{
+    key = 'equality',
+    loc_txt = {
+        name = 'The Equality',
+        text = {
+            "{X:mult,C:white} X#1# {} Mult if played",
+            "hand contains",
+            "a {C:attention}#2#",
+        }
+    },
+    rarity = 3,
+    cost = 8,
+    atlas = "Reverse_Jokers",
+    pos = {x = 1, y = 6},
+    config = {Xmult = 3, type = 'reverse_parity'},
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.Xmult, "Parity"}}
+    end,
+}
+
+SMODS.Joker{
+    key = 'goddess_sword',
+    loc_txt = {
+        name = 'Goddess Sword',
+        text = {
+            "This Joker gains an effect",
+            "every time hand score",
+            "exceeds blind requirement",
+            "Currently: {X:mult,C:white}X#1#{} Mult, {X:green,C:white}+#2#{} Base Probability",
+            "{X:blue,C:white}+#3#{} Hands, {C:red}+#4#{} Discards"
+        }
+    },
+    rarity = 4,
+    cost = 20,
+    atlas = "Reverse_Jokers",
+    pos = {x = 2, y = 6},
+    soul_pos = {x = 0, y = 7},
+    config = {extra = {level = 0, probability = 0, hands = 0, discards = 0}},
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+        local mult = math.max(center.ability.extra.level - 4, 0) + 2 + (center.ability.extra.level > 0 and 1 or 0)
+        return {vars =
+            {
+                mult,
+                center.ability.extra.probability,
+                center.ability.extra.hands,
+                center.ability.extra.discards,
+            }
+        }
+    end,
+    generate_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+        full_UI_table.name = localize { type = 'name', set = "Other", key = "sword_" .. math.min(card.ability.extra.level, 4), nodes = {} }
+        SMODS.Center.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+    end,
+    set_sprites = function(self, card, front)
+        if card.ability then
+            card.children.floating_sprite:set_sprite_pos({x = math.min(card.ability.extra.level, 4), y = 7})
+        end
+    end,
+    calculate = function(self,card,context)
+        --change hands and discards to apply *after* blind effect, i.e. Burglar
+        --update card name on level up
+        if context.joker_main then
+            return {x_mult = math.max(card.ability.extra.level - 4, 0) + 2 + (card.ability.extra.level > 0 and 1 or 0)}
+        end
+        if context.setting_blind then
+            ease_hands_played(card.ability.extra.hands)
+            ease_discard(card.ability.extra.discards)
+        end
+        if context.final_scoring_step and not context.blueprint then
+            if hand_chips * mult > G.GAME.blind.chips then
+                local sword_message = ""
+                local sword_color = G.C.RED
+                card.ability.extra.level = card.ability.extra.level + 1
+                if card.ability.extra.level == 1 then
+                    sword_color = G.C.RED
+                    sword_message = "Power"
+                elseif card.ability.extra.level == 2 then
+                    sword_color = G.C.GREEN
+                    sword_message = "Courage"
+                elseif card.ability.extra.level == 3 then
+                    sword_color = G.C.BLUE
+                    sword_message = "Wisdom"
+                elseif card.ability.extra.level == 4 then
+                    sword_message = "Awaken"
+                else
+                    sword_message = "X1 Mult"
+                end
+                G.E_MANAGER:add_event(Event({ -- flip card
+                    trigger = 'after',
+                    delay = 0.15,
+                    func = function()
+                        card:flip();  
+                        play_sound('card1', percent);
+                        card:juice_up(0.3, 0.3);
+                        return true
+                    end
+                }))
+                delay(.5)
+                G.E_MANAGER:add_event(Event({ --update values
+                    trigger = 'after',
+                    delay = 0.15,
+                    func = function()
+                        if card.ability.extra.level == 2 then
+                            card.ability.extra.probability = 1
+                            for k, v in pairs(G.GAME.probabilities) do 
+                                G.GAME.probabilities[k] = v + card.ability.extra.probability * 2 ^ #find_joker("Oops! All 6s")
+                            end
+                        elseif card.ability.extra.level == 3 then
+                            card.ability.extra.hands = 1
+                        elseif card.ability.extra.level == 4 then
+                            card.ability.extra.discards = 1
+                        end
+                        card.children.floating_sprite:set_sprite_pos({x = math.min(card.ability.extra.level, 4), y = 7})
+                        return true
+                    end
+                }))
+                G.E_MANAGER:add_event(Event({ -- flip card
+                    trigger = 'after',
+                    delay = 0.15,
+                    func = function()
+                        card:flip();  
+                        play_sound('card1', percent);
+                        card:juice_up(0.3, 0.3);
+                        return true
+                    end
+                }))
+                return {message = sword_message, colour = sword_color, card = card}
+            end
+        end
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        for k, v in pairs(G.GAME.probabilities) do 
+            G.GAME.probabilities[k] = v - card.ability.extra.probability * 2 ^ #find_joker("Oops! All 6s")
+        end
+    end
+}
+
+SMODS.Joker{
     key = 'nazuna',
     loc_txt = {
         name = "Nazuna",
@@ -993,3 +1537,34 @@ SMODS.Joker{
         end
     end
 }
+
+--[[
+SMODS.Joker{
+    key = 'Rekoj',
+    loc_txt = {
+        name = 'Rekoj',
+        text = {
+            '{C:mult}#1#{} Mult'
+        }
+    },
+    rarity = 1,
+    cost = 1,
+    atlas = "Reverse_Jokers",
+    pos = {x = 0, y = 0},
+    config = {extra = {mult = -4}},
+    blueprint_compat = true,
+    loc_vars = function(self, info_queue, center)
+        return {vars = {center.ability.extra.mult}}
+    end,
+    calculate = function(self,card,context)
+        if context.joker_main then
+            return {
+                card = card,
+                mult_mod = card.ability.extra.mult,
+                message = "" .. card.ability.extra.mult,
+                colour = G.C.Mult
+            }
+        end
+    end
+}
+]]

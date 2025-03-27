@@ -1,6 +1,26 @@
 return {
     descriptions = {
         Other={
+            sword_0 = {
+                name = "Goddess Sword",
+                text = {" "}
+            },
+            sword_1 = {
+                name = "Goddess Longsword",
+                text = {" "}
+            },
+            sword_2 = {
+                name = "Goddess White Sword",
+                text = {" "}
+            },
+            sword_3 = {
+                name = "Master Sword",
+                text = {" "}
+            },
+            sword_4 = {
+                name = "True Master Sword",
+                text = {" "}
+            },
             daily_description = {
                 name = "Effects:",
                 text = {

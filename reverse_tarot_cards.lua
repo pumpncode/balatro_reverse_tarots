@@ -33,6 +33,12 @@ SMODS.Consumable{
             }}
         }
         if not (not fool_c or fool_c.name == 'The Fool' or fool_c.name == 'c_reverse_c_reverse_fool') then
+            if fool_c.mod then --acts like normal Fool on modded cards
+                if fool_c.mod.id ~= "reverse_tarot" then
+                    info_queue[#info_queue+1] = fool_c
+                    return {vars = {fool_c.loc_txt.name}}
+                end
+            end
             local words = {}
             for w in fool_c.key:gmatch("([^_]+)") do
                 table.insert(words, w) 
@@ -101,6 +107,14 @@ SMODS.Consumable{
                     final_word = "wheel_of_fortune"
                 elseif final_word == "man" then
                     final_word = "hanged_man"
+                end
+                if fool_c.mod then --acts like normal Fool on modded cards
+                    if fool_c.mod.id ~= "reverse_tarot" then
+                        local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, G.GAME.last_tarot_planet, 'fool')
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+                        return true
+                    end
                 end
                 if fool_c.set == "Planet" then
                     for i, v in ipairs(G.GAME.fool_table) do

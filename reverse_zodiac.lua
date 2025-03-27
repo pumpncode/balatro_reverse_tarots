@@ -415,7 +415,7 @@ SMODS.Consumable{
         --print(center.ability.name)
     end,
     can_use = function(self, card)
-        if G and G.hand then return true end
+        if G and G.hand and #G.hand.cards > 1 then return true end
     end,
     use = function(self, card, area, copier)
         new_card = SMODS.create_card({area = G.hand, set = "Base", enhancement = 'm_reverse_marble'})
@@ -877,7 +877,7 @@ SMODS.Consumable{
         return {vars = {center.ability.context.destroy}}
     end,
     can_use = function(self, card)
-        if G and G.hand then
+        if G and G.hand and #G.hand.cards > 0 then
             return true
         end
     end,
@@ -997,7 +997,7 @@ SMODS.Consumable{
         end
     end,
     can_use = function(self, card)
-        if G and G.hand then
+        if G and G.hand and #G.hand.cards > 0 then
             return true
         end
     end,

@@ -2,7 +2,7 @@
 version = "1.0.0"
 priority = 0
 
-# adds reverse_zodiac to most recently used tarot/Planet
+# adds Zodiac to most recently used tarot/Planet
 [[patches]]
 [patches.pattern]
 target = "functions/misc_functions.lua"
@@ -480,6 +480,18 @@ for _, area in ipairs(SMODS.get_card_areas('jokers')) do
 match_indent = true
 times = 1
 
+# Astromancer patch
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if (self.ability.set == 'Planet' or (self.ability.set == 'Booster' and self.ability.name:find('Celestial'))) and #find_joker('Astronomer') > 0 then self.cost = 0 end'''
+position = "after"
+payload = '''
+if (self.ability.set == 'reverse_zodiac' or (self.ability.set == 'Booster' and self.ability.name:find('reverse_zodiac'))) and #find_joker('j_reverse_divination') > 0 then self.cost = 0 end'''
+match_indent = true
+times = 1
+
+
 # Planet collection screen patch
 [[patches]]
 [patches.pattern]
@@ -657,7 +669,7 @@ position = 'before'
 match_indent = true
 payload = '''
 --Change Beast wave
-if G.GAME.blind.name == 'bl_reverse_final_beast' and G.GAME.chips - G.GAME.blind.chips >= 0 and not (G.GAME.beast_wave == 'bl_reverse_final_beast') then
+if G.GAME.blind.name == 'bl_reverse_final_beast' and G.GAME.chips - G.GAME.blind.chips >= 0 and (G.GAME.beast_wave ~= 'bl_reverse_final_beast_dummy') then
     local current_blind = 1
     for k, v in pairs(G.GAME.beast_blinds) do
         if v == G.GAME.beast_wave then
@@ -670,11 +682,20 @@ if G.GAME.blind.name == 'bl_reverse_final_beast' and G.GAME.chips - G.GAME.blind
             v:set_debuff(false)
         end
     end
-    G.GAME.beast_wave = G.GAME.beast_blinds[current_blind + 1]
     G.GAME.blank_obj:defeat()
+    G.P_BLINDS[G.GAME.beast_wave].discovered = true
+    ease_hands_played(-G.GAME.current_round.hands_left + G.GAME.round_resets.hands)
+    ease_discard(-G.GAME.current_round.discards_left + G.GAME.round_resets.discards)
+    for k, v in ipairs(G.discard.cards) do
+        G.deck:emplace(v)
+    end
+    pseudoshuffle(G.deck.cards, pseudoseed('beast_shuffle'))
+    G.discard.cards = {}
+    G.GAME.beast_wave = G.GAME.beast_blinds[current_blind + 1]
     G.GAME.blank_obj = Blind(G.GAME.blind.T.x, G.GAME.blind.T.y, G.GAME.blind.T.w, G.GAME.blind.T.h)
     G.GAME.blank_obj:set_blind(G.P_BLINDS[G.GAME.beast_wave])
     G.GAME.blank_obj:change_colour()
+    G.GAME.blind.children.animatedSprite:set_sprite_pos(G.P_BLINDS[G.GAME.beast_wave].pos)
     if G.GAME.beast_wave == 'bl_reverse_final_war' then
         G.GAME.beast_prepped = true
     else
@@ -685,8 +706,19 @@ if G.GAME.blind.name == 'bl_reverse_final_beast' and G.GAME.chips - G.GAME.blind
         end
         G.GAME.beast_prepped = nil
     end
+    G.GAME.blank_played = true
     G.STATE = G.STATES.DRAW_TO_HAND
     G.STATE_COMPLETE = false
     return true
 end
+G.GAME.beast_wave = "bl_reverse_final_famine"
 '''
+
+# reusable test patch
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "G.RESET_BLIND_STATES = nil"
+position = 'after'
+match_indent = true
+payload = ''''''

@@ -31,13 +31,13 @@ SMODS.Blind{
         end
         return
     end,
-    disable_self = function(self)
+    disable = function(self)
         for _, v in ipairs(G.playing_cards) do
             v:set_debuff(false)
         end
         return
     end,
-    defeat_self = function(self)
+    defeat = function(self)
         for _, v in ipairs(G.playing_cards) do
             v:set_debuff(false)
         end
@@ -326,6 +326,7 @@ SMODS.Blind{
 }
 
 function SMODS.current_mod.reset_game_globals(run_start)
+    G.GAME.pool_flags.crt_extinct = G.GAME.pool_flags.crt_extinct
     G.GAME.eligible_blinds = {
         'bl_hook',
         'bl_ox',
@@ -360,7 +361,7 @@ function SMODS.current_mod.reset_game_globals(run_start)
         'bl_reverse_final_pestilence',
         'bl_reverse_final_war',
         'bl_reverse_final_death',
-        --'bl_reverse_final_beast'
+        'bl_reverse_final_beast_dummy'
     }
     G.GAME.day = G.GAME.day
     G.GAME.fool_table = {
@@ -534,114 +535,28 @@ SMODS.Blind{
 }
 
 SMODS.Blind{
-    key = "final_beast",
+    key = "final_beast_dummy",
     atlas = "Reverse_Bosses",
     pos = {x = 0, y = 10},
     loc_txt = {
         name = "The Beast",
         text = {
-            "Face the gauntlet...",
-            "#1#",
-            "#2#",
-            "#3#"
+            "The end is nigh",
+            " ",
         }
     },
-    dollars = 5,
     mult = 2,
+    no_collection = true,
     discovered = false,
-    boss = {showdown = true, min = 10, max = 10},
-    in_pool = false, --remove this later
+    boss = {min = 6},
+    in_pool = function(self)
+        return false
+    end,
     boss_colour = HEX('C72A00'),
     loc_vars = function(self, info_queue, center)
-        if G.GAME.beast_wave then
-            if #G.localization.descriptions.Blind[G.GAME.beast_wave].text == 1 then
-                return {vars = {G.localization.descriptions.Blind[G.GAME.beast_wave].name, G.localization.descriptions.Blind[G.GAME.beast_wave].text[1], " "}}
-            else
-                return {vars = {G.localization.descriptions.Blind[G.GAME.beast_wave].name, G.localization.descriptions.Blind[G.GAME.beast_wave].text[1], G.localization.descriptions.Blind[G.GAME.beast_wave].text[2]}}
-            end
-        else
-            return {vars = {"Be", "not", "afraid"}}
-        end
-    end,
-    collection_loc_vars = function (self)
         return {vars = {"Be", "not", "afraid"}}
     end,
-    set_blind = function(self)
-        if G.GAME.beast_wave == 'bl_reverse_final_war' then
-            G.GAME.beast_prepped = true
-        end
-        local current_blind = 1
-        for k, v in ipairs(G.GAME.beast_blinds) do
-            if v == G.GAME.beast_wave then
-                current_blind = k
-            end
-        end
-        G.GAME.beast_wave = G.GAME.beast_blinds[current_blind]
-        G.GAME.blind:set_text()
-        G.GAME.blank_obj = Blind(G.GAME.blind.T.x, G.GAME.blind.T.y, G.GAME.blind.T.w, G.GAME.blind.T.h)
-        G.GAME.blank_obj:set_blind(G.P_BLINDS[G.GAME.beast_blinds[current_blind]])
-        G.GAME.blank_obj:set_text()
-        G.GAME.blank_obj:change_colour()
-        if G.GAME.beast_prepped and G.GAME.beast_wave == 'bl_reverse_final_war' then
-            for k, v in pairs(G.jokers.cards) do
-                if v.debuff then
-                    v:set_debuff(false)
-                end
-            end
-            if #G.jokers.cards <= 2 then
-                for k, v in pairs(G.jokers.cards) do
-                    v:set_debuff(true)
-                end
-            else
-                local _card1 = pseudorandom_element(G.jokers.cards, pseudoseed('crimson_heart'))
-                local _card2 = pseudorandom_element(G.jokers.cards, pseudoseed('crimson_heart'))
-                while _card1 == _card2 do
-                    _card2 = pseudorandom_element(G.jokers.cards, pseudoseed('crimson_heart'))
-                end
-                _card1:set_debuff(true)
-                _card2:set_debuff(true)
-            end
-        end
-        G.GAME.beast_prepped = nil
-    end,
-    press_play = function(self)
-        if self.disabled then return end
-        if G.GAME.beast_wave == 'bl_reverse_final_war' then
-            G.GAME.beast_prepped = true
-        end
-    end,
-    drawn_to_hand = function(self)
-        G.GAME.blank_obj:set_text()
-        if self.disabled then return end
-        if G.GAME.beast_prepped then
-            for k, v in pairs(G.jokers.cards) do
-                if v.debuff then
-                    v:set_debuff(false)
-                end
-            end
-            if #G.jokers.cards <= 2 then
-                for k, v in pairs(G.jokers.cards) do
-                    v:set_debuff(true)
-                end
-            else
-                local _card1 = pseudorandom_element(G.jokers.cards, pseudoseed('crimson_heart'))
-                local _card2 = pseudorandom_element(G.jokers.cards, pseudoseed('crimson_heart'))
-                while _card1 == _card2 do
-                    _card2 = pseudorandom_element(G.jokers.cards, pseudoseed('crimson_heart'))
-                end
-                _card1:set_debuff(true)
-                _card2:set_debuff(true)
-            end
-        else
-            for k, v in pairs(G.jokers.cards) do
-                if v.debuff then
-                    v:set_debuff(false)
-                end
-            end
-        end
-        G.GAME.beast_prepped = nil
-        G.GAME.blank_obj:change_colour()
-    end,
+    --implementation is done through patch
     disable = function(self)
         self.disabled = true
         return
@@ -659,11 +574,13 @@ SMODS.Blind{
         }
     },
     dollars = 5,
-    mult = 1,
+    mult = 2,
     discovered = false,
     boss = {showdown = true, min = 10, max = 10},
     boss_colour = HEX('613333'),
-    in_pool = false,
+    in_pool = function(self)
+        return false
+    end,
     loc_vars = function(self, info_queue, center)
         return
     end,
@@ -703,7 +620,9 @@ SMODS.Blind{
     discovered = false,
     boss = {showdown = true, min = 10, max = 10},
     boss_colour = HEX('42694B'),
-    in_pool = false,
+    in_pool = function(self)
+        return false
+    end,
     loc_vars = function(self, info_queue, center)
         return
     end,
@@ -730,7 +649,9 @@ SMODS.Blind{
     discovered = false,
     boss = {showdown = true, min = 10, max = 10},
     boss_colour = HEX('862D2D'),
-    in_pool = false,
+    in_pool = function(self)
+        return false
+    end,
     loc_vars = function(self, info_queue, center)
         return
     end,
@@ -821,7 +742,9 @@ SMODS.Blind{
     discovered = false,
     boss = {showdown = true, min = 10, max = 10},
     boss_colour = HEX('929292'),
-    in_pool = false,
+    in_pool = function(self)
+        return false
+    end,
     loc_vars = function(self, info_queue, center)
         return
     end,
@@ -831,6 +754,154 @@ SMODS.Blind{
     disable = function(self)
         self.disabled = true
         return
+    end,
+}
+
+SMODS.Blind{
+    key = "final_beast",
+    atlas = "Reverse_Bosses",
+    pos = {x = 0, y = 10},
+    loc_txt = {
+        name = "The Beast",
+        text = {
+            "Face the gauntlet...",
+            "#1#",
+            "#2#",
+            "#3#"
+        }
+    },
+    dollars = 5,
+    mult = 1.5,
+    discovered = false,
+    boss = {showdown = true, min = 10, max = 10},
+    boss_colour = HEX('C72A00'),
+    loc_vars = function(self, info_queue, center)
+        if G.GAME.beast_wave then
+            if #G.localization.descriptions.Blind[G.GAME.beast_wave].text == 1 then
+                return {vars = {G.localization.descriptions.Blind[G.GAME.beast_wave].name, G.localization.descriptions.Blind[G.GAME.beast_wave].text[1], " "}}
+            else
+                return {vars = {G.localization.descriptions.Blind[G.GAME.beast_wave].name, G.localization.descriptions.Blind[G.GAME.beast_wave].text[1], G.localization.descriptions.Blind[G.GAME.beast_wave].text[2]}}
+            end
+        else
+            return {vars = {"Be", "not", "afraid"}}
+        end
+    end,
+    collection_loc_vars = function (self)
+        return {vars = {"Be", "not", "afraid"}}
+    end,
+    set_blind = function(self)
+        local current_blind = 1
+        for k, v in ipairs(G.GAME.beast_blinds) do
+            if v == G.GAME.beast_wave then
+                current_blind = k
+            end
+        end
+        if G.GAME.beast_wave == 'bl_reverse_final_war' then
+            G.GAME.beast_prepped = true
+        end
+        G.GAME.beast_wave = G.GAME.beast_blinds[current_blind]
+        G.GAME.blind.children.animatedSprite:set_sprite_pos(G.P_BLINDS[G.GAME.beast_wave].pos)
+        G.GAME.blind:set_text()
+        G.GAME.blank_obj = Blind(G.GAME.blind.T.x, G.GAME.blind.T.y, G.GAME.blind.T.w, G.GAME.blind.T.h)
+        G.GAME.blank_obj:set_blind(G.P_BLINDS[G.GAME.beast_blinds[current_blind]])
+        G.GAME.blank_obj:set_text()
+        G.GAME.blank_obj:change_colour()
+        --print(G.GAME.beast_prepped)
+        --print(G.GAME.beast_wave)
+        if G.GAME.beast_prepped and G.GAME.beast_wave == 'bl_reverse_final_war' then
+            for k, v in pairs(G.jokers.cards) do
+                if v.debuff then
+                    v:set_debuff(false)
+                end
+            end
+            if #G.jokers.cards <= 2 then
+                for k, v in pairs(G.jokers.cards) do
+                    v:set_debuff(true)
+                end
+            else
+                temp_hand = {}
+                for k, v in ipairs(G.jokers.cards) do temp_hand[#temp_hand+1] = v end
+                pseudoshuffle(temp_hand, pseudoseed('crimson_heart'))
+                temp_hand[1]:set_debuff(true)
+                temp_hand[2]:set_debuff(true)
+            end
+        end
+        G.GAME.beast_prepped = nil
+    end,
+    press_play = function(self)
+        if self.disabled then return end
+        G.GAME.beast_prepped = true
+    end,
+    drawn_to_hand = function(self)
+        G.GAME.blank_obj:set_text()
+        G.GAME.blind.children.animatedSprite:set_sprite_pos(G.P_BLINDS[G.GAME.beast_wave].pos)
+        if self.disabled then return end
+        if G.GAME.blank_played then
+            G.GAME.blank_obj:set_blind(G.P_BLINDS[G.GAME.beast_wave])
+            G.GAME.blind:set_text()
+        end
+        G.GAME.blank_obj:change_colour()
+        if G.GAME.beast_prepped and G.GAME.beast_wave == 'bl_reverse_final_war' then
+            for k, v in pairs(G.jokers.cards) do
+                if v.debuff then
+                    v:set_debuff(false)
+                end
+            end
+            if #G.jokers.cards <= 2 then
+                for k, v in pairs(G.jokers.cards) do
+                    v:set_debuff(true)
+                end
+            else
+                temp_hand = {}
+                for k, v in ipairs(G.jokers.cards) do temp_hand[#temp_hand+1] = v end
+                pseudoshuffle(temp_hand, pseudoseed('crimson_heart'))
+                temp_hand[1]:set_debuff(true)
+                temp_hand[2]:set_debuff(true)
+            end
+        elseif G.GAME.beast_wave ~= 'bl_reverse_final_war' then
+            for k, v in pairs(G.jokers.cards) do
+                if v.debuff then
+                    v:set_debuff(false)
+                end
+            end
+        end
+        G.GAME.beast_prepped = nil
+        G.GAME.blank_played = false
+    end,
+    disable = function(self)
+        self.disabled = true
+        for k, v in ipairs(G.playing_cards) do
+            SMODS.debuff_card(v, false, 'bl_reverse_final_pestilence')
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    v:juice_up()
+                    return true
+                end
+            }))
+        end
+        for k, v in ipairs(G.jokers.cards) do
+            if v.debuff then
+                v:set_debuff(false)
+            end
+        end
+    end,
+    defeat = function(self)
+        self.disabled = true
+        G.GAME.beast_wave = nil
+        for k, v in ipairs(G.playing_cards) do
+            SMODS.debuff_card(v, false, 'bl_reverse_final_pestilence')
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    v:juice_up()
+                    return true
+                end
+            }))
+        end
+        for k, v in ipairs(G.jokers.cards) do
+            if v.debuff then
+                v:set_debuff(false)
+            end
+        end
     end,
 }
 
@@ -847,6 +918,10 @@ SMODS.Blind{
     dollars = 5,
     mult = 2,
     discovered = false,
+    in_pool = function(self)
+        return false
+    end,
+    no_collection = true,
     boss = {showdown = true, min = 10, max = 10},
     boss_colour = HEX('E3E3E3'),
     loc_vars = function(self, info_queue, center)

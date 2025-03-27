@@ -6,8 +6,8 @@
 <li>revoo_. - Talsiman Mod compatibility</li>
 </ul>
 
-#-----------------------------------------------------------------------------------------<br/>
-Tarots<br/>
+<hr/>
+<h3>Tarots:</h3><br/>
 Reverse Fool - Creates an inverted version of the last Tarot card used (regular becomes reverse, reverse becomes regular. Planets
 convert to Zodiacs and vice versa)<br/>
 Reverse Magician - Enhances up to 2 selected cards into Counterfeit card (1/5 for $6, 1/15 for +60 Mult)<br/>
@@ -31,14 +31,15 @@ Reverse Moon - Enhances up to 2 cards to Secondary Clubs (counts as both base su
 Reverse Sun - Enhances up to 2 cards to Secondary Hearts (counts as both base suit and Hearts)<br/>
 Reverse Judgement -Creates a random Negative Joker with an Ephemeral sticker (perishes in 3 Rounds, has 0 sell value)<br/>
 Reverse World - Enhances up to 2 cards to Secondary Spades (counts as both base suit and Spades)<br/>
-#----------------------------------------------------------------------------------------------<br/>
-Planet<br/>
+<hr/>
+<h3>Planets:</h3><br/>
 Janus - Levels up Parity (+2 Mult, +25 Chip)<br/>
 
-Hand<br/>
+<h3>Hands:</h3><br/>
 Parity - Play five cards that are either all even or all odd (excludes face cards)<br/>
-#----------------------------------------------------------------------------------------------<br/>
-Zodiacs<br/>
+
+<hr/>
+<h3>Zodiacs:</h3><br/>
 Aquarius - Mercury - Add one Stone and one Marble card to hand<br/>
 Pisces - Venus - Applies random enhnacement to selected card, and one other of the same rank in your full deck<br/>
 Aries - Earth - Adds one copy of selected card to hand <br/>
@@ -54,19 +55,23 @@ Capricorn - Eris - Select up to three cards, converts the left two into the rank
 Ophiuchus - Janus - Gives up to two random Zodiac cards<br/>
 
 Appears in Astrology Packs<bt/>
+
+<hr/>
+<h3>Seals:</h3>
 Magenta Seal: If held in hand at the end of round, grands Zodiac corresponding to the last hand played
-#----------------------------------------------------------------------------------------------<br/>
-Spectrals<br/>
+
+<hr/>
+<h3>Tags:</h3><br/>
 Polaris Tag - Immediately open a Mega Astrology Pack<br/>
-#----------------------------------------------------------------------------------------------<br/>
-Vouchers<br/>
+<hr/>
+<h3>Vouchers:</h3><br/>
 Zodiac Merchant - Zodiac cards can appear in the shop<br/>
 Zodiac Tycoon - Zodiac cards appear 2x more frequently in the shop<br/>
-#----------------------------------------------------------------------------------------------<br/>
-Spectrals<br/>
+<hr/>
+<h3>Spectrals:</h3><br/>
 Horoscope - Applies a Magenta Seal to the selected card<br/>
-#----------------------------------------------------------------------------------------------<br/>
-Jokers<br/>
+<hr/>
+<h3>Jokers:</h3><br/>
 Rekoj - Gives -4 Mult<br/>
 Counterfeit Bill - Gain $5 at the end of round. Increases by $1 per Counterfeit card triggered (Enhancement gated)<br/>
 Wild Joker - Gains x.1 Mult per card in deck with more than one suit (Enhancement gated)<br/>
@@ -82,6 +87,8 @@ Card Reading - Creates a Reverse Tarot when hand played with money over interest
 Dead Cat - Sets hands per round to 1, cannot be overwritten. Prevents death if chips scored are at least 50% of required amount (activates up to 9 times, then destroys itself)<br/>
 The D6 - Randomly gives between 1 and 6 xMult<br/>
 Double Down - 1 in 2 chance for this card's xMult to be multiplied by 2 when hand played. Starts at X1, resets at end of round<br/>
+
+<hr/>
 Daily Double - X2 of a specific value depending on the day of the week<br/>
 
 <ul>
@@ -94,9 +101,28 @@ Daily Double - X2 of a specific value depending on the day of the week<br/>
 <li>Saturday: X2 Chip</li>
 </ul>
 Harmonic Convergence - 1/N chance to gain x.25 Mult when hand scored, starts at X1 Mult.  N begins at 1 and increases by 1 for each successful trigger<br/>
+Cathod Ray Tubes - +1 chips per CRT level in settings.  -10 CRT per hand played. 1/3 chance to shatter if CRT is 0<br/>
+Liquid Crystal Display - Gains X0.02 chips per level CRT below 100, starts at X1.  Increases CRT by 10 when hand played.  Will break if CRT reaches 100<br/>
+Mirthful Joker - +10 Mult if played hand contains a Parity<br/>
+Cunning Joker - +80 Chips if played hand contains a Parity<br/>
+Nebula - Adds the number of times *other poker hands* have been played this run as mult<br/>
+Divination - Zodiac Packs in the shop are now free<br/>
+Astromancer - Creates a Zodiac card when Boss Blind is selected<br/>
+Oracle - Joker gains X0.25 Chips when Zodiac card used, starts at X1<br/>
+Monkey's Paw - If you would lose, +1 Hand, -1 Hand Size.  Activates up to three times<br/>
+The Equality - X3 Mult if played hand contains a Parity<br/>
+Goddess Sword - Gains an additional effect every time hand score exceeds blind requirement (flaming score)<br/>
+<ul>
+<li>Goddess Sword: X2 Mult</li>
+<li>Goddess Longsword: Gain X1 Mult</li>
+<li>Goddess White Sword: Gain +1 BASE Probability</li>
+<li>Master Sword: Gain +1 Hand on selecting blind</li>
+<li>True Master Sword: Gain +1 Discard on selecting blind</li>
+<li>Additional: Gain X1 Mult</li>
+</ul>
 Nazuna - Gains X.1 Mult per scoring enhanced card. Does not remove enhancement<br/>
-#----------------------------------------------------------------------------------------------<br/>
-Blinds<br/>
+<hr/>
+<h3>Blinds:</h3><br/>
 The Companion (Berkano) - Debuffs all cards in scoring hand (min ante 3)<br/>
 The Pure (Dagaz) - Debuffs all cards held in hand (minimum ante 1)<br/>
 The Change (Perthro) - Shuffles score order of all played cards (and held cards) (min ante 2)<br/>
@@ -109,7 +135,15 @@ The Blank (Blank Rune) - Triggers a different Boss Blind effect every hand (not 
 The Void (Black Rune) - Removes enhancements from scored cards after scoring (min ante 6)<br/>
 
 Finisher Blinds (NOT FULLY IMPLEMENTED)<br/>
-The Beast - <br/>
-The Delirium - <br/>
+The Beast - Face the gauntlet. 5 waves, 1.5x Base score. Regain hands, discards at end of wave. Played cards shuffled back into deck<br/>
 
-#----------------------------------------------------------------------------------------------<br/>
+<ul>
+<li>The Famine - -2 Hand Size</li>
+<li>The Pestilence - Played cards are debuffed for all future waves</li>
+<li>The Warrior - 2 random Jokers debuffed each hand</li>
+<li>The Reaper - First card in scored hand is destroyed *before* scoring</li>
+<li>The Beast - No gimmick</li>
+</ul>
+The Delirium - TBA <br/>
+
+<hr/>
