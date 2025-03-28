@@ -515,6 +515,23 @@ match_indent = true
 payload = '''
 if G.GAME.blind.name == "bl_reverse_ehwaz" then
     final_scoring_hand = G.hand.cards
+    local holder = G.hand
+    G.hand = G.play
+    G.play = holder
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "-- TARGET: effects after hand evaluation"
+position = 'after'
+match_indent = true
+payload = '''
+if G.GAME.blind.name == "bl_reverse_ehwaz" then
+    local holder = G.hand
+    G.hand = G.play
+    G.play = holder
 end
 '''
 

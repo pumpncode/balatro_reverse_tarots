@@ -158,6 +158,16 @@ SMODS.Blind{
     press_play = function(self)
         return
     end,
+    drawn_to_hand = function(self)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all();
+            return true
+        end })) --unselects cards
+        delay(0.5)
+    end,
     disable = function(self)
         self.disabled = true
         return
