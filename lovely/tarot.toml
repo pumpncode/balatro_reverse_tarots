@@ -711,7 +711,6 @@ if G.GAME.blind.name == 'bl_reverse_final_beast' and G.GAME.chips - G.GAME.blind
     G.STATE_COMPLETE = false
     return true
 end
-G.GAME.beast_wave = "bl_reverse_final_famine"
 '''
 
 # reusable test patch

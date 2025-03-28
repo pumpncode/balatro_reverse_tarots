@@ -198,6 +198,11 @@ SMODS.Blind{
         G.GAME.blind.chips = G.GAME.blind.chips/3
         G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         return
+    end,
+    defeat = function(self)
+        if self.disabled then return end
+        G.hand:change_size(-2)
+        return
     end
 }
 
@@ -377,7 +382,7 @@ function SMODS.current_mod.reset_game_globals(run_start)
         "c_planet_X",
         "c_ceres",
         "c_eris",
-        "c_janus",
+        "c_reverse_janus",
         "c_reverse_aquarius",
         "c_reverse_pisces",
         "c_reverse_aries",

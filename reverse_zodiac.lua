@@ -132,20 +132,18 @@ SMODS.Seal{
                     trigger = 'before',
                     delay = 0.0,
                     func = (function()
-                        if G.GAME.last_hand_played then
-                            local _planet = 0
-                            for k, v in pairs(G.P_CENTER_POOLS.Planet) do
-                                if v.config.hand_type == G.GAME.last_hand_played then
-                                    _planet = v.key
-                                end
+                        local _planet = 0
+                        for k, v in pairs(G.P_CENTER_POOLS.Planet) do
+                            if v.config.hand_type == G.GAME.last_hand_played then
+                                _planet = v.key
                             end
-                            for i, v in ipairs(G.GAME.fool_table) do
-                                if _planet == v then
-                                    local card = create_card("Tarot_Planet",G.consumeables, nil, nil, nil, nil, G.GAME.fool_table[i+13], 'blusl')
-                                    card:add_to_deck()
-                                    G.consumeables:emplace(card)
-                                    G.GAME.consumeable_buffer = 0 break
-                                end
+                        end
+                        for i, v in ipairs(G.GAME.fool_table) do
+                            if _planet == v then
+                                local card = create_card("Tarot_Planet",G.consumeables, nil, nil, nil, nil, G.GAME.fool_table[i+13], 'blusl')
+                                card:add_to_deck()
+                                G.consumeables:emplace(card)
+                                G.GAME.consumeable_buffer = 0 break
                             end
                         end
                 return true
