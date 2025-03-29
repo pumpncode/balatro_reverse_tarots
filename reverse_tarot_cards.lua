@@ -14,6 +14,7 @@ SMODS.Consumable{
             "{C:attention}Created card: #1#{}"
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_fool'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_fool'].atlas]
@@ -173,6 +174,7 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_magician'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_magician'].atlas]
@@ -261,6 +263,7 @@ SMODS.Consumable{
             number_planets = 1
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_high_priestess'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_high_priestess'].atlas]
@@ -352,6 +355,7 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_empress'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_empress'].atlas]
@@ -439,6 +443,7 @@ SMODS.Consumable{
             number_cards = 2
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_emperor'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_emperor'].atlas]
@@ -488,6 +493,7 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_heirophant'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_heirophant'].atlas]
@@ -576,6 +582,7 @@ SMODS.Consumable{
             max_highlighted = 1
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_lovers'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_lovers'].atlas]
@@ -664,6 +671,7 @@ SMODS.Consumable{
             max_highlighted = 1
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_chariot'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_chariot'].atlas]
@@ -752,6 +760,7 @@ SMODS.Consumable{
             max_highlighted = 1
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_justice'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_justice'].atlas]
@@ -838,6 +847,7 @@ SMODS.Consumable{
             dollars = 20
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_hermit'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_hermit'].atlas]
@@ -874,6 +884,7 @@ SMODS.Consumable{
             edition_odds = 4
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_wheel_of_fortune'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_wheel_of_fortune'].atlas]
@@ -911,7 +922,7 @@ SMODS.Consumable{
                     text = localize('k_nope_ex'),
                     scale = 1.3, 
                     hold = 1.4,
-                    major = used_tarot,
+                    major = card,
                     backdrop_colour = G.C.SECONDARY_SET.Tarot,
                     align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and 'tm' or 'cm',
                     offset = {x = 0, y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and -0.2 or 0},
@@ -943,6 +954,7 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_fool'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_strength'].atlas]
@@ -1032,6 +1044,7 @@ SMODS.Consumable{
             number_cards = 1
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_hanged_man'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_hanged_man'].atlas]
@@ -1081,6 +1094,7 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_death'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_death'].atlas]
@@ -1158,6 +1172,7 @@ SMODS.Consumable{
             max_money = 50
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_temperance'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_temperance'].atlas]
@@ -1235,6 +1250,7 @@ SMODS.Consumable{
             max_highlighted = 1
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_devil'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_devil'].atlas]
@@ -1323,6 +1339,7 @@ SMODS.Consumable{
             max_highlighted = 1
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_tower'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_tower'].atlas]
@@ -1411,6 +1428,7 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_star'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_star'].atlas]
@@ -1499,6 +1517,7 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_moon'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_moon'].atlas]
@@ -1587,6 +1606,7 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_sun'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_sun'].atlas]
@@ -1669,6 +1689,7 @@ SMODS.Consumable{
             "{C:inactive}(Is always {}{C:attention}Ephemeral{}{C:inactive})",
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_judgement'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_judgement'].atlas]
@@ -1722,6 +1743,7 @@ SMODS.Consumable{
             max_highlighted = 2
         }
     },
+    discovered = true,
     set_sprites = function(self, card, front)
         if G.P_CENTERS['c_world'].atlas and card.config.center.discovered then
             card.children.center.atlas = G.ASSET_ATLAS[G.P_CENTERS['c_world'].atlas]

@@ -1,5 +1,5 @@
 SMODS.Joker{
-    key = 'Rekoj',
+    key = 'rekoj',
     loc_txt = {
         name = 'Rekoj',
         text = {
@@ -1399,7 +1399,16 @@ SMODS.Joker{
     end,
     set_sprites = function(self, card, front)
         if card.ability then
-            card.children.floating_sprite:set_sprite_pos({x = math.min(card.ability.extra.level, 4), y = 7})
+            if card.ability.extra then
+                card.children.floating_sprite:set_sprite_pos({x = math.min(card.ability.extra.level, 4), y = 7})
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if card.ability then
+            if card.ability.extra then
+                card.children.floating_sprite:set_sprite_pos({x = math.min(card.ability.extra.level, 4), y = 7})
+            end
         end
     end,
     calculate = function(self,card,context)
@@ -1413,6 +1422,20 @@ SMODS.Joker{
             ease_discard(card.ability.extra.discards)
         end
         if context.final_scoring_step and not context.blueprint then
+            if G.GAME.challenge == "c_reverse_trial" then
+                if hand_chips * mult < G.GAME.blind.chips then
+                    hand_chips = 0
+                    mult = 0
+                    return {
+                        message = "Too Low!",
+                        colour = G.C.YELLOW,
+                        card = card
+                    }
+                end
+                if not G.GAME.blind.boss then
+                    return
+                end
+            end
             if hand_chips * mult > G.GAME.blind.chips then
                 local sword_message = ""
                 local sword_color = G.C.RED

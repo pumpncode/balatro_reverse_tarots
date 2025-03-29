@@ -4,6 +4,7 @@ assert(SMODS.load_file('reverse_blinds.lua'))()
 assert(SMODS.load_file('reverse_tarot_cards.lua'))()
 assert(SMODS.load_file('reverse_zodiac.lua'))()
 assert(SMODS.load_file('deck_skins.lua'))()
+assert(SMODS.load_file('reverse_challenges.lua'))()
 
 SMODS.Atlas{
     key = 'Reverse_Jokers',
@@ -161,6 +162,41 @@ function CardArea:align_cards()
         end
     end
 end
+
+--[[local pool_hook =  get_current_pool
+
+function  get_current_pool(_type, _rarity, _legendary, _append)
+    local pool, pool_key =  pool_hook(_type, _rarity, _legendary, _append)
+    local new_pool = {}
+    for k, v in pairs(pool) do
+        local add = false
+        --print(G.P_CENTERS[v])
+        if G.GAME.challenge == "c_reverse_trial" then
+            local pool = nil
+            for _k, _v in pairs(G) do
+                if G[k] then
+                    if G[k][v] then
+                        pool = _v break 
+                    end
+                end
+            end
+            if pool then
+                if G[pool][v].mod then
+                    if G[pool][v].mod.id == "reverse_tarot" then
+                        add = true
+                    end
+                else
+                    add = true
+                end
+            end
+        else
+            add = true
+        end
+        if add then table.insert(new_pool, v) end
+    end
+    if #new_pool == 0 then pool_key = "" end
+    return new_pool, pool_key
+end]]
 
 local hand_hook = evaluate_poker_hand
 

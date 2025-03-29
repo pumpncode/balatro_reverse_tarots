@@ -505,7 +505,7 @@ match_indent = true
 times = 1
 
 # Blind patches
-# Ehwaz (incomplete)
+# Ehwaz
 [[patches]]
 [patches.pattern]
 target = "functions/state_events.lua"

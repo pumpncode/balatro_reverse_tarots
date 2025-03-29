@@ -1,4 +1,14 @@
 return {
+    misc = {
+        v_text = {
+            ch_c_reverse_sword_1 = {
+                "{C:attention}Goddess Sword{} only levels up after clearing {C:attention}Boss Blind{}"
+            },
+            ch_c_reverse_sword_2 = {
+                "Hands that do not clear the {C:attention}Blind requirement{} will not score"
+            }
+        }
+    },
     descriptions = {
         Other={
             sword_0 = {
