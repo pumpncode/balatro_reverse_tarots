@@ -163,40 +163,57 @@ function CardArea:align_cards()
     end
 end
 
---[[local pool_hook =  get_current_pool
+local pack_hook = get_pack
 
-function  get_current_pool(_type, _rarity, _legendary, _append)
-    local pool, pool_key =  pool_hook(_type, _rarity, _legendary, _append)
-    local new_pool = {}
-    for k, v in pairs(pool) do
-        local add = false
-        --print(G.P_CENTERS[v])
-        if G.GAME.challenge == "c_reverse_trial" then
-            local pool = nil
-            for _k, _v in pairs(G) do
-                if G[k] then
-                    if G[k][v] then
-                        pool = _v break 
-                    end
-                end
+function get_pack(_key, _type) --patch out modded packs if my challenges are active
+    local ret = pack_hook(_key, _type)
+    if G.GAME.challenge == "c_reverse_trial" then
+        while ret.mod do
+            if ret.mod.id ~= "reverse_tarot" then
+                print(ret.mod.id)
+                ret = pack_hook(_key, _type)
+            else
+                break
             end
-            if pool then
-                if G[pool][v].mod then
-                    if G[pool][v].mod.id == "reverse_tarot" then
-                        add = true
-                    end
-                else
-                    add = true
-                end
-            end
-        else
-            add = true
         end
-        if add then table.insert(new_pool, v) end
+    else
+        ret = pack_hook(_key, _type)
     end
-    if #new_pool == 0 then pool_key = "" end
-    return new_pool, pool_key
-end]]
+    return ret
+end
+
+local pool_hook = get_current_pool
+
+function  get_current_pool(_type, _rarity, _legendary, _append) --patch out modded jokers, consumeables, tags if my challenges are active
+    local pool, pool_key =  pool_hook(_type, _rarity, _legendary, _append)
+    if G.GAME.challenge == "c_reverse_trial" then
+        local pool_holder = ""
+        for k, v in ipairs(pool) do
+            if pool_holder == "" then
+                if G.P_CENTERS[v] then
+                    pool_holder = "P_CENTERS"
+                elseif G.P_TAGS[v] then
+                    pool_holder = "P_TAGS"
+                end
+            end
+            if pool_holder ~= "" then
+                if G[pool_holder][v] then
+                    if G[pool_holder][v].mod and G[pool_holder][v].mod.id ~= "reverse_tarot" then
+                        pool[k] = "UNAVAILABLE"
+                    end
+                end
+            end
+        end
+    end
+    local valid = false
+    for k, v in ipairs(pool) do
+        if v ~= "UNAVAILABLE" then valid = true break end
+    end
+    if not valid then --failsafe if pool has no eligible members?
+        return get_current_pool("Tarot", _rarity, _legendary, _append)
+    end
+    return pool, pool_key
+end
 
 local hand_hook = evaluate_poker_hand
 

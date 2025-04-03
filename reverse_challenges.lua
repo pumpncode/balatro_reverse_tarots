@@ -8,6 +8,7 @@ SMODS.Challenge{
             {id = "no_shop_jokers"},
             {id = "reverse_sword_1"},
             {id = "reverse_sword_2"},
+            {id = "reverse_sword_3"},
         },
         modifiers = {
             {

@@ -6,6 +6,9 @@ return {
             },
             ch_c_reverse_sword_2 = {
                 "Hands that do not clear the {C:attention}Blind requirement{} will not score"
+            },
+            ch_c_reverse_sword_3 = {
+                "Skip Tags, Jokers, Packs, and Consumables from other mods cannot appear"
             }
         }
     },
