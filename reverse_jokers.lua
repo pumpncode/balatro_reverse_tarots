@@ -566,7 +566,8 @@ SMODS.Joker{
     calculate = function(self,card,context)
         if context.joker_main then
             if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                if G.GAME.dollars >= G.GAME.interest_cap then
+                local dollars = (type(G.GAME.dollars) == "table" and to_number(G.GAME.dollars)) or G.GAME.dollars --Talisman my beloathed
+                if dollars >= G.GAME.interest_cap then
                     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                     G.E_MANAGER:add_event(Event({
                         trigger = 'before',
