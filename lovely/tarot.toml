@@ -730,6 +730,16 @@ if G.GAME.blind.name == 'bl_reverse_final_beast' and G.GAME.chips - G.GAME.blind
 end
 '''
 
+# no tarot challenge patch
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "elseif v.id == 'no_shop_jokers' then"
+position = 'before'
+match_indent = true
+payload = '''elseif v.id == 'no_shop_tarots' then
+    self.GAME.tarot_rate = 0'''
+
 # reusable test patch
 [[patches]]
 [patches.pattern]

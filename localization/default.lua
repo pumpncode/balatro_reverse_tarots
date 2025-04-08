@@ -7,9 +7,12 @@ return {
             ch_c_reverse_sword_2 = {
                 "Hands that do not clear the {C:attention}Blind requirement{} will not score"
             },
-            ch_c_reverse_sword_3 = {
+            ch_c_reverse_no_mods = {
                 "Skip Tags, Jokers, Packs, and Consumables from other mods cannot appear"
-            }
+            },
+            ch_c_no_shop_tarots={
+                "Tarot cards no longer appear in the {C:attention}shop",
+            },
         }
     },
     descriptions = {

@@ -37,7 +37,7 @@ SMODS.Consumable{
             if fool_c.mod then --acts like normal Fool on modded cards
                 if fool_c.mod.id ~= "reverse_tarot" then
                     info_queue[#info_queue+1] = fool_c
-                    return {vars = {fool_c.loc_txt.name}}
+                    return {vars = {fool_c.loc_txt and fool_c.loc_txt.name or fool_c.name}}
                 end
             end
             local words = {}
