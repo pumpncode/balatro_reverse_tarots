@@ -167,7 +167,7 @@ local pack_hook = get_pack
 
 function get_pack(_key, _type) --patch out modded packs if my challenges are active
     local ret = pack_hook(_key, _type)
-    if string.find(G.GAME.challenge, "c_reverse") then
+    if G.GAME.challenge and string.find(G.GAME.challenge, "c_reverse") then
         while ret.mod do
             if ret.mod.id ~= "reverse_tarot" then
                 print(ret.mod.id)
@@ -186,7 +186,7 @@ local pool_hook = get_current_pool
 
 function  get_current_pool(_type, _rarity, _legendary, _append) --patch out modded jokers, consumeables, tags if my challenges are active
     local pool, pool_key =  pool_hook(_type, _rarity, _legendary, _append)
-    if string.find(G.GAME.challenge, "c_reverse") then
+    if G.GAME.challenge and string.find(G.GAME.challenge, "c_reverse") then
         local pool_holder = ""
         for k, v in ipairs(pool) do
             if pool_holder == "" then
