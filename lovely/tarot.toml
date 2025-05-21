@@ -92,6 +92,7 @@ match_indent = true
 times = 2
 
 # fixes Flower Pot and Seeing Double
+#Flower Pot
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -101,6 +102,7 @@ payload = '''if not SMODS.has_any_suit(context.scoring_hand[i]) and not context.
 match_indent = true
 times = 2
 
+#Seeing Double
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -739,6 +741,21 @@ position = 'before'
 match_indent = true
 payload = '''elseif v.id == 'no_shop_tarots' then
     self.GAME.tarot_rate = 0'''
+
+
+#localization patch
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''init_localization()'''
+position = 'after'
+match_indent = true
+payload = '''
+G.localization.descriptions['Joker']['j_four_fingers'].text = {
+        "All {C:attention}Flushes{}, {C:attention}Parities{}, and",
+        "{C:attention}Straights{} can be",
+        "made with {C:attention}4{} cards",
+    }'''
 
 # reusable test patch
 [[patches]]

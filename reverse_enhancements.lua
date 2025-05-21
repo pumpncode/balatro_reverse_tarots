@@ -138,7 +138,7 @@ SMODS.Enhancement{
         if context.main_scoring and context.cardarea == G.play then
             return { x_chips = card.ability.extra.x_chips}
         end
-        if context.destroy_card and context.cardarea == G.play and pseudorandom('crystal') < G.GAME.probabilities.normal/4 then
+        if context.destroy_card and context.cardarea == G.play and pseudorandom('crystal') < G.GAME.probabilities.normal/4 and SMODS.has_enhancement(context.destroy_card, 'm_reverse_crystal') then
             return {remove = true}
         end
     end

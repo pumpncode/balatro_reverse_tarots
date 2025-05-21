@@ -71,18 +71,24 @@ SMODS.PokerHand {
         --print(center.ability.name)
     end,
     evaluate = function(parts, hand)
-        if #hand == 5 then
+        local four = next(find_joker("Four Fingers")) and 1 or 0
+        subhand = {}
+        if #hand >= 5 - four then
             if hand[1].base.id then
                 local parity = hand[1].base.id % 2
                 if hand[1].base.id == 14 then parity = 1 end
                 for i=1, #hand, 1 do
                     if hand[i]:is_face() or SMODS.has_enhancement(hand[i], "m_stone") or SMODS.has_enhancement(hand[i], "m_reverse_marble") then
-                        return {}
+                        --return {}
                     elseif hand[i].base.id and (hand[i].base.id % 2 ~= parity and not (hand[i].base.id == 14 and parity == 1)) then
-                        return {}
+                        --return {}
+                    else
+                        subhand[#subhand + 1] = hand[i]
                     end
                 end
-                return {hand}
+                if #subhand >= 5 - four then
+                    return {subhand}
+                end
             end
         end
         return {}

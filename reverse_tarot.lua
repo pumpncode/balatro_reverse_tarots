@@ -184,7 +184,7 @@ end
 
 local pool_hook = get_current_pool
 
-function  get_current_pool(_type, _rarity, _legendary, _append) --patch out modded jokers, consumeables, tags if my challenges are active
+function  get_current_pool(_type, _rarity, _legendary, _append) --patch out modded jokers, vouchers, consumeables, tags if my challenges are active
     local pool, pool_key =  pool_hook(_type, _rarity, _legendary, _append)
     if G.GAME.challenge and string.find(G.GAME.challenge, "c_reverse") then
         local pool_holder = ""
