@@ -1260,8 +1260,8 @@ SMODS.Joker{
             "{C:inactive}({C:attention}#2#{C:inactive} activations left)"
         }
     },
-    rarity = 3,
-    cost = 8,
+    rarity = 2,
+    cost = 6,
     atlas = "Reverse_Jokers",
     pos = {x = 5, y = 0},
     config = {extra = {remaining = 3, hands = 1}},
@@ -1270,7 +1270,7 @@ SMODS.Joker{
         return {vars = {center.ability.extra.hands, center.ability.extra.remaining}}
     end,
     set_sprites = function(self, card, front)
-        if card.ability then
+        if card.ability and card.ability.extra then
             card.children.center:set_sprite_pos({x = 5, y = 3 - card.ability.extra.remaining})
         end
     end,
@@ -1327,7 +1327,6 @@ SMODS.Joker{
                             return true
                         end
                     })) 
-                    G.GAME.pool_flags.crt_extinct = true
                     return {
                         message = "Granted...",
                         colour = G.C.Yellow
